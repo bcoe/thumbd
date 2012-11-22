@@ -1,0 +1,31 @@
+{
+	"name": "thumbd",
+	"version": "0.0.1",
+	"directories": {
+		"lib": "./lib",
+		"bin": "./bin",
+		"data": "./data"
+	},
+	"main": "./lib/index.js",
+	"bin": "./bin/thumbd.js",
+	"author": "Ben Coe <bencoe@gmail.com>",
+	"engines": [
+		"node"
+	],
+	"description": "Node.js/AWS/ImageMagick-based image thumbnailing service.",
+	"keywords": [
+		"image",
+		"processing"
+	],
+	"repository": {
+	  "type": "git",
+	  "url": "git://github.com/bcoe/thumbd.git"
+	},
+	"dependencies": {
+		"knox": ">=0.4.1",
+		"aws-lib": ">=0.1.4",
+		"underscore": ">=1.4.2",
+		"tmp": ">=0.0.16",
+		"optimist": "0.3.4"
+	}
+}
