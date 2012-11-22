@@ -81,3 +81,8 @@ thumbd thumbnail --remote_image=<path to image in s3> --thumbnail_descriptions=<
 
 * **remote_image** indicates the bucket to perform the thumbnailing operations upon.
 * **thumbnail_descriptions** the path to a JSON file describing the thumbnails which should be created (see _example.json_ in the _data_ directory).
+
+The Future
+==========
+
+thumbd is my attempt at a rough first pass at creating a simple, fast, easy to deploy, thumbnailing service. Something which I needed for work. I will be actively improving upon this project.
