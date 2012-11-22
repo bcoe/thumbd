@@ -30,9 +30,9 @@ The thumbd server:
 * listens for thumbnailing jobs on the queue specified.
 * downloads the original image from S3, to a temporary directory.
 * Uses ImageMagick to perform the set of transformations on the image.
-* uploads the thumbnails created back to S3, with the following naming convention: <original filename excluding extension>\_<transformation name>.jpg: source.jpg.
+* uploads the thumbnails created back to S3, with the following naming convention: [original filename excluding extension]\_[transformation name].jpg
 	
-Assume that the following thumbnail job is received over SQS:
+Assume that the following thumbnail job was received over SQS:
 
 ```json
 {
@@ -57,19 +57,27 @@ Assume that the following thumbnail job is received over SQS:
 }
 ```
 
-S3 will have the following files stored in it:
+S3 will have the following files stored to it:
 
-**/example.png**
-**/example\_tiny.jpg**
-**/example\_small.jpg**
-**/example\_medium.jpg**
+* **/example.png**
+* **/example\_tiny.jpg**
+* **/example\_small.jpg**
+* **/example\_medium.jpg**
 
 CLI
 ===
 
-Starting a server:
+Starting the server:
 
 ```bash
 thumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket>
 ```
 
+Manually submit an SQS thumbnailing job (useful for testing purposes):
+
+```bash
+thumbd thumbnail --remote_image=<path to image in s3> --thumbnail_descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>
+```
+
+* **remote_image** indicates the bucket to perform the thumbnailing operations upon.
+* **thumbnail_descriptions** the path to a JSON file describing the thumbnails which should be created (see _example.json_ in the _data_ directory).
