@@ -1,6 +1,8 @@
 Thumbd
 ------
 
+Author: Benjamin Coe [@benjamincoe](https://twitter.com/benjamincoe)
+
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
 Setup
@@ -86,3 +88,8 @@ The Future
 ==========
 
 thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. I need thumbd for work, and will be actively contributing to this project.
+
+Copyright
+---------
+
+Copyright (c) 2012 Attachments.me. See LICENSE.txt for further details.
