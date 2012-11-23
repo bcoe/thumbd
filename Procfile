@@ -1,1 +1,1 @@
-thumbd: node bin/thumbd server
+worker: node bin/thumbd server
