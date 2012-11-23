@@ -16,7 +16,7 @@ Thumbd requires the following environment variables to be set:
 * **AWS_KEY** the key for your AWS account (the IAM user must have access to the appropriate SQS and S3 resources).
 * **AWS_SECRET** the AWS secret key.
 * **BUCKET** the bucket to download the original images from. The thumbnails will also be placed in this bucket.
-* **SQS_QUEUE** the queue to listen for image thumbnaling
+* **SQS_QUEUE** the queue to listen for image thumbnaling. Should be in the format `123456789/queue-name`.
 
 You can export these variables to your environment, or specify them when running the thumbd CLI.
 
@@ -36,7 +36,7 @@ Assume that the following thumbnail job was received over SQS:
 
 ```json
 {
-	"original": "example.png"
+	"original": "example.png",
 	"thumbnail_descriptions": [
 		{
 			"suffix": "tiny",
