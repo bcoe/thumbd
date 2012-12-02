@@ -73,7 +73,7 @@ Thumbnail Descriptions
 
 The descriptions received in the thumbnail job describe the way in which thumbnails should be generated.
 
-**description** accepts the following keys:
+_description_ accepts the following keys:
 
 * **suffix** a suffix describing the thumbnail.
 * **width** the width of the thumbnail.
