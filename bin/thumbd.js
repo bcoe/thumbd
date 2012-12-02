@@ -18,7 +18,7 @@ var thumbd = require('../lib'),
 		aws_key: process.env.AWS_KEY,
 		aws_secret: process.env.AWS_SECRET,
 		sqs_queue: process.env.SQS_QUEUE,
-		thumbnail_descriptions: "./data/example.json",
+		descriptions: "./data/example.json",
 		remote_image: null
 	};
 
@@ -86,7 +86,7 @@ switch (mode) {
 			/**
 				job = {
 					"original": "/foo/awesome.jpg",
-					"thumbnail_descriptions": [{
+					"descriptions": [{
 						"suffix": "small",
 						"width": 64,
 						"height": 64
@@ -95,7 +95,7 @@ switch (mode) {
 			*/
 			sqs.call ( "SendMessage", {MessageBody: JSON.stringify({
 				original: opts.remote_image,
-				thumbnail_descriptions: JSON.parse(fs.readFileSync(opts.thumbnail_descriptions).toString())
+				descriptions: JSON.parse(fs.readFileSync(opts.descriptions).toString())
 			})}, function (err, result) {
 				console.log(result);
 			});
@@ -109,6 +109,6 @@ switch (mode) {
 			"Usage: thumbd <command>\n\n",
 			"where <command> is one of:\n",
 			"\tthumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket>\n",
-			"\tthumbd thumbnail --remote_image=<path to image in s3> --thumbnail_descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>\n"
+			"\tthumbd thumbnail --remote_image=<path to image in s3> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>\n"
 		)
 }

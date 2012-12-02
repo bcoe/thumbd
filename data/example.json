@@ -12,6 +12,7 @@
 	{
 		"suffix": "medium",
 		"width": 150,
-		"height": 150
+		"height": 150,
+		"strategy": "zoomAndMatt"
 	}
 ]
