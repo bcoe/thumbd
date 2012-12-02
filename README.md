@@ -39,7 +39,7 @@ Assume that the following thumbnail job was received over SQS:
 ```json
 {
 	"original": "example.png",
-	"descriptions: [
+	"descriptions": [
 		{
 			"suffix": "tiny",
 			"width": 48,
