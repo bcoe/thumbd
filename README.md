@@ -39,7 +39,7 @@ Assume that the following thumbnail job was received over SQS:
 ```json
 {
 	"original": "example.png",
-	"descriptions": [
+	"descriptions: [
 		{
 			"suffix": "tiny",
 			"width": 48,
@@ -48,12 +48,14 @@ Assume that the following thumbnail job was received over SQS:
 		{
 			"suffix": "small",
 			"width": 100,
-			"height": 100
+			"height": 100,
+			"background": "red"
 		},
 		{
 			"suffix": "medium",
 			"width": 150,
-			"height": 150
+			"height": 150,
+			"strategy": "bounded"
 		}
 	]
 }
@@ -65,6 +67,21 @@ Once thumbd processes the job, the files stored in S3 will look something like t
 * **/example\_tiny.jpg**
 * **/example\_small.jpg**
 * **/example\_medium.jpg**
+
+Thumbnail Descriptions
+======================
+
+The descriptions received in the thumbnail job describe the way in which thumbnails should be generated.
+
+**description** accepts the following keys:
+
+* **suffix** a suffix describing the thumbnail.
+* **width** the width of the thumbnail.
+* **height** the height of the thumbnail.
+* **background** background color for matte.
+* **strategy** indicate an approach for creating the thumbnail.
+  * **matted (default)** maintain aspect ratio, places image on _width x height_ matte.
+  * **bounded** maintain aspect ratio, don't place image on matte.
 
 CLI
 ===
