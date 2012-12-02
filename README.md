@@ -42,6 +42,7 @@ Assume that the following thumbnail job was received over SQS:
 	"thumbnail_descriptions": [
 		{
 			"suffix": "tiny",
+			"strategies": ",
 			"width": 48,
 			"height": 48
 		},
