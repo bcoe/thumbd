@@ -80,8 +80,8 @@ _description_ accepts the following keys:
 * **height** the height of the thumbnail.
 * **background** background color for matte.
 * **strategy** indicate an approach for creating the thumbnail.
-  * **matted (default)** maintain aspect ratio, places image on _width x height_ matte.
-  * **bounded** maintain aspect ratio, don't place image on matte.
+  * **matted** maintain aspect ratio, places image on _width x height_ matte.
+  * **bounded (default)** maintain aspect ratio, don't place image on matte.
 
 CLI
 ===
