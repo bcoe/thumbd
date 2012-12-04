@@ -15,5 +15,10 @@
 		"width": 150,
 		"height": 150,
 		"strategy": "matted"
+	},
+	{
+		"suffix": "640x1096",
+		"width": 640,
+		"height": 1096
 	}
 ]
