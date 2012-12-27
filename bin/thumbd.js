@@ -109,6 +109,6 @@ switch (mode) {
 			"Usage: thumbd <command>\n\n",
 			"where <command> is one of:\n",
 			"\tthumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket>\n",
-			"\tthumbd thumbnail --remote_image=<path to image in s3> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>\n"
+			"\tthumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>\n"
 		)
 }

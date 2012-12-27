@@ -30,7 +30,9 @@ Server
 The thumbd server:
 
 * listens for thumbnailing jobs on the queue specified.
-* downloads the original image from S3 to a temporary directory.
+* downloads the original image from our thumbnailng S3 bucket, or from an HTTP(s) resource.
+  * HTTP resources are prefixed with __http://__ or __https://__.
+  * S3 resources are a path to the image in the S3 bucket indicated by the __BUCKET__ environment variable.
 * Uses ImageMagick to perform a set of transformations on the image.
 * uploads the thumbnails created back to S3, with the following naming convention: [original filename excluding extension]\_[thumbnail suffix].jpg
 	
@@ -95,7 +97,7 @@ thumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue
 Manually submitting an SQS thumbnailing job (useful for testing purposes):
 
 ```bash
-thumbd thumbnail --remote_image=<path to image in s3> --thumbnail_descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>
+thumbd thumbnail --remote_image=<path to image s3 or http> --thumbnail_descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>
 ```
 
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
