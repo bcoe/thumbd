@@ -8,7 +8,8 @@
 		"suffix": "small",
 		"width": 100,
 		"height": 100,
-		"background": "red"
+		"background": "red",
+		"strategy": "matted"
 	},
 	{
 		"suffix": "medium",
