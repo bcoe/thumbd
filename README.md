@@ -84,6 +84,7 @@ _description_ accepts the following keys:
 * **strategy** indicate an approach for creating the thumbnail.
   * **matted** maintain aspect ratio, places image on _width x height_ matte.
   * **bounded (default)** maintain aspect ratio, don't place image on matte.
+  * **fill** both resizes and zooms into an image, filling the specified dimensions.
 
 CLI
 ===
