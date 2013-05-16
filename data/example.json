@@ -9,17 +9,18 @@
 		"width": 100,
 		"height": 100,
 		"background": "red",
-		"strategy": "matted"
+		"strategy": "fill"
 	},
 	{
 		"suffix": "medium",
 		"width": 150,
 		"height": 150,
-		"strategy": "matted"
+		"strategy": "bounded"
 	},
 	{
 		"suffix": "640x1096",
 		"width": 640,
-		"height": 1096
+		"height": 1096,
+		"strategy": "matted"
 	}
 ]
