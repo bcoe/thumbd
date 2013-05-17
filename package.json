@@ -22,8 +22,8 @@
 	  "url": "git://github.com/bcoe/thumbd.git"
 	},
 	"dependencies": {
-		"knox": ">=0.4.1",
-		"aws-lib": ">=0.1.4",
+		"knox": ">=0.8.0",
+		"aws-lib": ">=0.2.1",
 		"underscore": ">=1.4.2",
 		"tmp": ">=0.0.16",
 		"optimist": "0.3.4",
