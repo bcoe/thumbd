@@ -1,12 +1,12 @@
 Thumbd
-------
+======
 
 Author: Benjamin Coe [@benjamincoe](https://twitter.com/benjamincoe)
 
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
 Setup
-=====
+-----
 
 ```
 apt-get install imagemagick
@@ -25,7 +25,7 @@ You can export these variables to your environment, or specify them when running
 Personally, I set these environment variables in a .env file and execute thumbd using Foreman.
 
 Server
-======
+------
 
 The thumbd server:
 
@@ -71,7 +71,7 @@ Once thumbd processes the job, the files stored in S3 will look something like t
 * **/example\_medium.jpg**
 
 Thumbnail Descriptions
-======================
+----------------------
 
 The descriptions received in the thumbnail job describe the way in which thumbnails should be generated.
 
@@ -87,7 +87,7 @@ _description_ accepts the following keys:
   * **fill** both resizes and zooms into an image, filling the specified dimensions.
 
 CLI
-===
+---
 
 Starting the server:
 
@@ -104,10 +104,21 @@ thumbd thumbnail --remote_image=<path to image s3 or http> --thumbnail_descripti
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
 * **thumbnail_descriptions** the path to a JSON file describing the dimensions of the thumbnails that should be created (see _example.json_ in the _data_ directory).
 
-The Future
-==========
+Production Notes
+----------------
 
-thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. I need thumbd for work, and will be actively contributing to this project.
+At Attachments.me, thumbd thumbnails tens of thousands of images a day. There are a few things you should know about our production deployment:
+
+* thumbd was not designed to be bullet-proof:
+  * it is run with an Upstart script, which keeps the thumbnailing process on its feet.
+* Node.js is a single process, this does not take advantage of multi-core/multi-processor servers.
+  * we run an instance of thumbd per-CPU on our servers.
+* We use Foreman's export functionality to simplify the process of creating Upstart scripts.
+
+The Future
+----------
+
+thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback.
 
 Copyright
 ---------
