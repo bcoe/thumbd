@@ -114,6 +114,12 @@ At Attachments.me, thumbd thumbnails tens of thousands of images a day. There ar
 * Node.js is a single process, this does not take advantage of multi-processor environments.
   * we run an instance of thumbd per-CPU on our servers.
 * we use Foreman's export functionality to simplify the process of creating Upstart scripts.
+* be midful of the version of ImageMagick you are running:
+  * make sure that you build it with the appropriate extensions for images you would like to support.
+  * we've had issues with some versions of ImageMagick, we run 6.6.2-6 in production.
+* Your SQS settings are important:
+    * setup a visibility-timeout/message-retention value that allows for a reasonable number of thumbnailing attempts.
+    * we use long-polling to reduce the latency time before a message is read.
 * in production, thumbd runs on Node 0.8.x. It has not been thoroughly tested with Streams 2.
 
 The Future
