@@ -113,8 +113,8 @@ At Attachments.me, thumbd thumbnails tens of thousands of images a day. There ar
   * it is run with an Upstart script, which keeps the thumbnailing process on its feet.
 * Node.js is a single process, this does not take advantage of multi-processor environments.
   * we run an instance of thumbd per-CPU on our servers.
-* We use Foreman's export functionality to simplify the process of creating Upstart scripts.
-* In production, thumbd runs on Node 0.8.x. It has not been thoroughly tested with Streams 2.
+* we use Foreman's export functionality to simplify the process of creating Upstart scripts.
+* in production, thumbd runs on Node 0.8.x. It has not been thoroughly tested with Streams 2.
 
 The Future
 ----------
