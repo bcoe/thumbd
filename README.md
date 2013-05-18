@@ -109,6 +109,8 @@ Production Notes
 
 At Attachments.me, thumbd thumbnails tens of thousands of images a day. There are a few things you should know about our production deployment:
 
+![Thumbd in Production](https://dl.dropboxusercontent.com/s/r2sce6tekfsvolt/thumbnailer.png?token_hash=AAHI0ARNhPdra24jqmDFpoC7nNiNTL8ELwOtaQB_YqVwpg "Thumbd in Production")
+
 * thumbd was not designed to be bullet-proof:
   * it is run with an Upstart script, which keeps the thumbnailing process on its feet.
 * Node.js is a single process, this does not take advantage of multi-processor environments.
