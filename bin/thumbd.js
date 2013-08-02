@@ -11,6 +11,7 @@ var thumbd = require('../lib'),
 		aws_key: process.env.AWS_KEY,
 		aws_secret: process.env.AWS_SECRET,
 		s3_acl: (process.env.S3_ACL || 'private'),
+		s3_storage_class: (process.env.S3_STORAGE_CLASS || 'STANDARD'),
 		sqs_queue: process.env.SQS_QUEUE,
 		bucket: process.env.BUCKET,
 		tmp_dir: (process.env.tmp_dir || '/tmp'),
@@ -54,7 +55,8 @@ switch (mode) {
 
 			var saver = new thumbd.Saver({
 				s3: s3,
-				s3_acl: opts.s3_acl
+				s3_acl: opts.s3_acl,
+				s3_storage_class: opts.s3_storage_class
 			});
 
 			var thumbnailer = new thumbd.Thumbnailer({
@@ -112,7 +114,7 @@ switch (mode) {
 		console.log(
 			"Usage: thumbd <command>\n\n",
 			"where <command> is one of:\n",
-			"\tthumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket>\n",
+			"\tthumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket> --s3_storage_class=<STANDARD or REDUCED_REDUNDANCY>\n",
 			"\tthumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>\n"
 		)
 }
