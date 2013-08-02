@@ -95,6 +95,7 @@ Starting the server:
 
 ```bash
 thumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket> --s3_acl=<private or public-read> --s3_storage_class=<STANDARD or REDUCED_REDUNDANCY>
+```
 
 Manually submitting an SQS thumbnailing job (useful for testing purposes):
 
