@@ -10,6 +10,7 @@ var thumbd = require('../lib'),
 	serverOpts = {
 		aws_key: process.env.AWS_KEY,
 		aws_secret: process.env.AWS_SECRET,
+		s3_acl: (process.env.S3_ACL || 'private'),
 		sqs_queue: process.env.SQS_QUEUE,
 		bucket: process.env.BUCKET,
 		tmp_dir: (process.env.tmp_dir || '/tmp'),
@@ -52,7 +53,8 @@ switch (mode) {
 			});
 
 			var saver = new thumbd.Saver({
-				s3: s3
+				s3: s3,
+				s3_acl: opts.s3_acl
 			});
 
 			var thumbnailer = new thumbd.Thumbnailer({
