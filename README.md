@@ -1,7 +1,7 @@
 Thumbd
 ======
 
-Author: Benjamin Coe [@benjamincoe](https://twitter.com/benjamincoe)
+Maintained by Benjamin Coe ([@benjamincoe](https://twitter.com/benjamincoe))
 
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
@@ -79,15 +79,19 @@ Submit thumbnailing jobs from your application by creating an instance of a thum
 
 ```javascript
 var Client = require('./thumbd').Client,
-    client = new Client({awsKey: 'AWS-KEY', awsSecret: 'AWS-SECRET', sqsQueue: '079299492607/thumbnailing-queue'});
+    client = new Client({
+        awsKey: 'AWS-KEY',
+        awsSecret: 'AWS-SECRET',
+        sqsQueue: '079299492607/thumbnailing-queue',
+        s3Bucket: 'thumbnails'
+    });
 
-/*
-originalImagePath: the path to the image in S3 that thumbnailing should be performed on.
-thumbnailDescriptions: array of thumbnailing meta information, see README.markdown.
+var destination = '/example/awesome.jpg';
 
-Creates a 100x100 red matted image called image_small.jpg and stores it in s3.
-*/
-client.thumbnail('image.jpg', [[{suffix: 'small', width: 100, height: 100, background: 'red', strategy: 'matted'}]);
+client.upload('/tmp/awesome.jpg', destination, function(err) {
+    if (err) throw err;
+    client.thumbnail(destination, [{suffix: 'small', width: 100, height: 100, background: 'red', strategy: 'matted'}]);
+});
 ```
 
 Thumbnail Descriptions
