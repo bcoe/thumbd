@@ -72,6 +72,24 @@ Once thumbd processes the job, the files stored in S3 will look something like t
 * **/example\_small.jpg**
 * **/example\_medium.jpg**
 
+Client
+------
+
+Submit thumbnailing jobs from your application by creating an instance of a thumbd client (clients will soon be offered for other languages).
+
+```javascript
+var Client = require('./thumbd').Client,
+    client = new Client({awsKey: 'AWS-KEY', awsSecret: 'AWS-SECRET', sqsQueue: '079299492607/thumbnailing-queue'});
+
+/*
+originalImagePath: the path to the image in S3 that thumbnailing should be performed on.
+thumbnailDescriptions: array of thumbnailing meta information, see README.markdown.
+
+Creates a 100x100 red matted image called image_small.jpg and stores it in s3.
+*/
+client.thumbnail('image.jpg', [[{suffix: 'small', width: 100, height: 100, background: 'red', strategy: 'matted'}]);
+```
+
 Thumbnail Descriptions
 ----------------------
 
