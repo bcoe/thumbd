@@ -101,6 +101,7 @@ _description_ accepts the following keys:
 * **width** the width of the thumbnail.
 * **height** the height of the thumbnail.
 * **background** background color for matte.
+* **format** what should the output format of the image be, e.g., `jpg`, `gif`, defaults to `jpg`.
 * **strategy** indicate an approach for creating the thumbnail.
   * **matted** maintain aspect ratio, places image on _width x height_ matte.
   * **bounded (default)** maintain aspect ratio, don't place image on matte.
