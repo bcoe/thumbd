@@ -2,7 +2,6 @@
 
 var thumbd = require('../lib'),
 	fs = require('fs'),
-	aws = require('aws-lib'),
 	knox = require('knox'),
 	argv = require('optimist').argv,
 	mode = argv._.shift(),
@@ -82,29 +81,22 @@ switch (mode) {
 		var opts = buildOpts(thumbnailOpts);
 		
 		if (!lastError) {
-			
-			var sqs = aws.createSQSClient(
-				opts.aws_key,
-				opts.aws_secret,
-				{'path': opts.sqs_queue}
-			);
-			
-			/**
-				job = {
-					"original": "/foo/awesome.jpg",
-					"descriptions": [{
-						"suffix": "small",
-						"width": 64,
-						"height": 64
-					}],
-				}
-			*/
-			sqs.call ( "SendMessage", {MessageBody: JSON.stringify({
-				original: opts.remote_image,
-				descriptions: JSON.parse(fs.readFileSync(opts.descriptions).toString())
-			})}, function (err, result) {
-				console.log(result);
+
+			// create a client for submitting
+			// thumbnailing jobs.
+			var client = new thumbd.Client({
+				awsKey: opts.aws_key,
+				awsSecret: opts.aws_secret,
+				sqsQueue: opts.sqs_queue
 			});
+
+			client.thumbnail(
+				opts.remote_image,
+				JSON.parse(fs.readFileSync(opts.descriptions).toString()),
+				function(err, res) {
+					console.log(res);
+				}
+			);
 			
 		} else {
 			console.log(lastError);
