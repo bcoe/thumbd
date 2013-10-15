@@ -94,7 +94,11 @@ switch (mode) {
 				opts.remote_image,
 				JSON.parse(fs.readFileSync(opts.descriptions).toString()),
 				function(err, res) {
-					console.log(res);
+					if (err) {
+						console.log(err);
+					} else {
+						console.log(res);
+					}
 				}
 			);
 			

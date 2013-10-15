@@ -20,7 +20,8 @@ Thumbd requires the following environment variables to be set:
 * **BUCKET** the bucket to download the original images from. The thumbnails will also be placed in this bucket.
 * **S3_ACL** the acl to set on the uploaded images. Must be one of `private`, or `public-read`. Defaults to `private`.
 * **S3_STORAGE_CLASS** the storage class for the uploaded images. Must be either `STANDARD` or `REDUCED_REDUNDANCY`. Defaults to `STANDARD`.
-* **SQS_QUEUE** the queue to listen for image thumbnaling. Should be in the format `123456789/queue-name`.
+* **SQS_QUEUE** the queue name to listen for image thumbnaling.
+  * As of version 2.0.0, the integer identifier from the queue URL is no longer required.
 
 You can export these variables to your environment, or specify them when running the thumbd CLI.
 

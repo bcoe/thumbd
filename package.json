@@ -1,6 +1,6 @@
 {
 	"name": "thumbd",
-	"version": "1.4.2",
+	"version": "2.0.0",
 	"directories": {
 		"lib": "./lib",
 		"bin": "./bin",
@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"knox": ">=0.8.0",
-		"aws-lib": ">=0.2.1",
+		"aws-sdk": ">=1.7.1",
 		"underscore": ">=1.4.2",
 		"tmp": ">=0.0.16",
 		"optimist": "0.3.4",
