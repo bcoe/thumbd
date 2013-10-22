@@ -85,7 +85,7 @@ var Client = require('./thumbd').Client,
 	client = new Client({
 		awsKey: 'AWS-KEY',
 		awsSecret: 'AWS-SECRET',
-		sqsQueue: '079299492607/thumbnailing-queue',
+		sqsQueue: 'thumbnailing-queue',
 		s3Bucket: 'thumbnails'
 	});
 
