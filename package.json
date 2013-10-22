@@ -1,6 +1,6 @@
 {
 	"name": "thumbd",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"directories": {
 		"lib": "./lib",
 		"bin": "./bin",
@@ -15,7 +15,10 @@
 	"description": "Node.js/AWS/ImageMagick-based image thumbnailing service.",
 	"keywords": [
 		"image",
-		"processing"
+		"processing",
+		"thumbnail",
+		"imagemagick",
+		"sqs"
 	],
 	"repository": {
 	  "type": "git",
