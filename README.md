@@ -1,8 +1,6 @@
 Thumbd
 ======
 
-Maintained by Benjamin Coe ([@benjamincoe](https://twitter.com/benjamincoe))
-
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
 Setup
