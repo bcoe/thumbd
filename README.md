@@ -5,6 +5,8 @@ Build Status: [![Build Status](https://travis-ci.org/bcoe/thumbd.png)](https://t
 
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
+You can easily run Thumbd on *Heroku*. Simply set the appropriate environment variables with _config:set_ and deploy using the _Procfile_ provided.
+
 Setup
 -----
 
