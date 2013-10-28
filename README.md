@@ -1,6 +1,8 @@
 Thumbd
 ======
 
+Build Status: [![Build Status](https://travis-ci.org/bcoe/thumbd.png)](https://travis-ci.org/bcoe/thumbd)
+
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.
 
 Setup
