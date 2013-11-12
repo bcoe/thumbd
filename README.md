@@ -19,6 +19,7 @@ Thumbd requires the following environment variables to be set:
 
 * **AWS_KEY** the key for your AWS account (the IAM user must have access to the appropriate SQS and S3 resources).
 * **AWS_SECRET** the AWS secret key.
+* **AWS_REGION** the AWS Region of the bucket. Defaults to: `us-east-1`.
 * **BUCKET** the bucket to download the original images from. The thumbnails will also be placed in this bucket.
 * **CONVERT_COMMAND** the ImageMagick convert command. Defaults to `convert`.
 * **REQUEST_TIMEOUT** how long to wait in milliseconds before aborting a remote request. Defaults to `15000`.
@@ -87,6 +88,7 @@ var Client = require('./thumbd').Client,
 	client = new Client({
 		awsKey: 'AWS-KEY',
 		awsSecret: 'AWS-SECRET',
+		awsRegion: 'AWS-REGION',
 		sqsQueue: 'thumbnailing-queue',
 		s3Bucket: 'thumbnails'
 	});
@@ -123,13 +125,13 @@ CLI
 Starting the server:
 
 ```bash
-thumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket> --s3_acl=<private or public-read> --s3_storage_class=<STANDARD or REDUCED_REDUNDANCY>
+thumbd server --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name> --bucket=<s3 thumbnail bucket> [--aws_region=<region>] [--tmp_dir=</tmp>] [--s3_acl=<private or public-read>] [--s3_storage_class=<STANDARD or REDUCED_REDUNDANCY>]
 ```
 
 Manually submitting an SQS thumbnailing job (useful for testing purposes):
 
 ```bash
-thumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name>
+thumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name> [--aws_region=<region>]
 ```
 
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
