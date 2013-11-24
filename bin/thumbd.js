@@ -10,6 +10,7 @@ var thumbd = require('../lib'),
 	serverOpts = {
 		aws_key: 'awsKey',
 		aws_secret: 'awsSecret',
+		aws_region: 'awsRegion',
 		bucket: 's3Bucket',
 		convert_command: 'convertCommand',
 		s3_acl: 's3Acl',
@@ -20,6 +21,7 @@ var thumbd = require('../lib'),
 	thumbnailOpts = {
 		aws_key: 'awsKey',
 		aws_secret: 'awsSecret',
+		aws_region: 'awsRegion',
 		descriptions: 'descriptions',
 		remote_image: 'remoteImage',
 		sqs_queue: 'sqsQueue'
@@ -56,6 +58,7 @@ switch (mode) {
 		var s3 = knox.createClient({
 			key: config.get('awsKey'),
 			secret: config.get('awsSecret'),
+			region: config.get('awsRegion'),
 			bucket: config.get('s3Bucket')
 		});
 
