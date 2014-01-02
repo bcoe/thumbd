@@ -55,11 +55,18 @@ switch (mode) {
 		var opts = buildOpts(serverOpts);
 		config.extend(opts);
 
-		var s3 = knox.createClient({
+		var knoxOpts = {
 			key: config.get('awsKey'),
 			secret: config.get('awsSecret'),
 			bucket: config.get('s3Bucket')
-		});
+		}
+
+		// Don't add the region if it's US Standard (us-east-1), otherwise we get 404's
+		if (config.get('awsRegion') != 'us-east-1') {
+			knoxOpts.region = config.get('awsRegion');
+		}
+
+		var s3 = knox.createClient(knoxOpts);
 
 		var grabber = new thumbd.Grabber(s3);
 		var saver = new thumbd.Saver(s3);
