@@ -61,9 +61,9 @@ switch (mode) {
 			bucket: config.get('s3Bucket')
 		}
 
-		// Don't add the region if it's US Standard (us-east-1), otherwise we get 404's
-		if (config.get('awsRegion') != 'us-east-1') {
-			knoxOpts.region = config.get('awsRegion');
+		// Knox wants 'us-standard' instead of 'us-east-1'
+		if (config.get('awsRegion') == 'us-east-1') {
+			knoxOpts.region = 'us-standard';
 		}
 
 		var s3 = knox.createClient(knoxOpts);
