@@ -58,7 +58,6 @@ switch (mode) {
 		var s3 = knox.createClient({
 			key: config.get('awsKey'),
 			secret: config.get('awsSecret'),
-			region: config.get('awsRegion'),
 			bucket: config.get('s3Bucket')
 		});
 
