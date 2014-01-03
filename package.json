@@ -1,6 +1,6 @@
 {
 	"name": "thumbd",
-	"version": "2.1.3",
+	"version": "2.3.0",
 	"directories": {
 		"lib": "./lib",
 		"bin": "./bin",
