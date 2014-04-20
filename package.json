@@ -1,6 +1,6 @@
 {
 	"name": "thumbd",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"directories": {
 		"lib": "./lib",
 		"bin": "./bin",
@@ -28,15 +28,15 @@
 	  "url": "git://github.com/bcoe/thumbd.git"
 	},
 	"dependencies": {
-		"knox": ">=0.8.0",
-		"aws-sdk": ">=1.7.1",
-		"underscore": ">=1.4.2",
-		"tmp": ">=0.0.16",
-		"optimist": "0.3.4",
-		"async": ">=0.2.7"
+		"knox": "~0.8.0",
+		"aws-sdk": "~1.7.1",
+		"underscore": "~1.4.2",
+		"tmp": "~0.0.16",
+		"optimist": "~0.3.4",
+		"async": "~0.2.7"
 	},
 	"devDependencies": {
-    "mocha": ">=1.7.4",
-    "sinon": ">=1.6.0"
+    "mocha": "~1.7.4",
+    "sinon": "~1.6.0"
 	}
 }
