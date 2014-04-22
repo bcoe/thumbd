@@ -117,6 +117,7 @@ _description_ accepts the following keys:
 	* **matted** maintain aspect ratio, places image on _width x height_ matte.
 	* **bounded (default)** maintain aspect ratio, don't place image on matte.
 	* **fill** both resizes and zooms into an image, filling the specified dimensions.
+    * **strict** resizes the image, filling the specified dimensions changing the aspect ratio
 * **quality** the quality of the thumbnail, in percent. e.g. `90`.
 
 CLI
