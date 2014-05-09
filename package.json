@@ -34,7 +34,8 @@
     "tmp": "~0.0.16",
     "optimist": "~0.3.4",
     "async": "~0.2.7",
-    "sprintf-js": "0.0.7"
+    "sprintf-js": "0.0.7",
+    "request": "~2.34.0"
   },
   "devDependencies": {
     "mocha": "~1.7.4",
