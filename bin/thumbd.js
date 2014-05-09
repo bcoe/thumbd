@@ -58,9 +58,10 @@ switch (mode) {
 		var knoxOpts = {
 			key: config.get('awsKey'),
 			secret: config.get('awsSecret'),
-			bucket: config.get('s3Bucket')
+			bucket: config.get('s3Bucket'),
+			region: config.get('awsRegion')
 		}
-
+		
 		// Knox wants 'us-standard' instead of 'us-east-1'
 		if (config.get('awsRegion') == 'us-east-1') {
 			knoxOpts.region = 'us-standard';
