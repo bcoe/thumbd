@@ -148,6 +148,10 @@ of S3 resources. A great example of this would be converting a set of images int
 
 ```json
 {
+	"resources": [
+		"images/image1.png",
+		"images/image2.png"
+	],
   "suffix": "stitch",
   "strategy": "%(command)s -border 0 -tile 2x1 -geometry 160x106 '%(localPaths[0])s' '%(localPaths[1])s' %(convertedPath)s",
   "command": "montage"
