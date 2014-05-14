@@ -135,7 +135,7 @@ describe("Thumbnailer", function() {
       thumbnailer._guessStrategy();
     });
 
-    it("returns 'manual' as strategy, if %(command)s is present", function() {
+    it("returns 'manual' as strategy, if %(.*)s is present", function() {
       var thumbnailer = new Thumbnailer({
         strategy: '%(command)s foo -bar'
       });
