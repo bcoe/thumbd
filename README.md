@@ -108,17 +108,19 @@ The descriptions received in the thumbnail job describe the way in which thumbna
 
 _description_ accepts the following keys:
 
-* **suffix** a suffix describing the thumbnail.
-* **width** the width of the thumbnail.
-* **height** the height of the thumbnail.
-* **background** background color for matte.
-* **format** what should the output format of the image be, e.g., `jpg`, `gif`, defaults to `jpg`.
-* **strategy** indicate an approach for creating the thumbnail.
-	* **matted** maintain aspect ratio, places image on _width x height_ matte.
-	* **bounded (default)** maintain aspect ratio, don't place image on matte.
-	* **fill** both resizes and zooms into an image, filling the specified dimensions.
-    * **strict** resizes the image, filling the specified dimensions changing the aspect ratio
-* **quality** the quality of the thumbnail, in percent. e.g. `90`.
+* **suffix:** a suffix describing the thumbnail.
+* **width:** the width of the thumbnail.
+* **height:** the height of the thumbnail.
+* **background:** background color for matte.
+* **format:** what should the output format of the image be, e.g., `jpg`, `gif`, defaults to `jpg`.
+* **strategy:** indicate an approach for creating the thumbnail.
+	* **bounded (default):** maintain aspect ratio, don't place image on matte.
+	* **matted:** maintain aspect ratio, places image on _width x height_ matte.
+	* **fill:** both resizes and zooms into an image, filling the specified dimensions.
+  * **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
+	* **manual:** allows for a custom convert command to be passed in:
+	  * `%(command)s -border 0 %(localPaths[0])s %(convertedPath)s`
+* **quality:** the quality of the thumbnail, in percent. e.g. `90`.
 
 CLI
 ---
@@ -137,6 +139,22 @@ thumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path 
 
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
 * **thumbnail_descriptions** the path to a JSON file describing the dimensions of the thumbnails that should be created (see _example.json_ in the _data_ directory).
+
+Advanced Options
+----------------
+
+* **Creating a Mosaic:** Rather than performing an operation on a single S3 resource, you can perform an operation on a set
+of S3 resources. A great example of this would be converting a set of images into a mosaic:
+
+```json
+{
+  "suffix": "stitch",
+  "strategy": "%(command)s -border 0 -tile 2x1 -geometry 160x106 '%(localPaths[0])s' '%(localPaths[1])s' %(convertedPath)s",
+  "command": "montage"
+}
+```
+
+The custom strategy can be used for a variety of purposes, experiment with it :thumbsup:
 
 Production Notes
 ----------------
