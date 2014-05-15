@@ -184,7 +184,7 @@ The Future
 thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback:
 
 * **If you create a client in a language other than JavaScript, let me know.**
-* **If you build something cool using thumbd, I will list it here.
+* **If you build something cool using thumbd let me know, I will list it here.**
 
 Copyright
 ---------
