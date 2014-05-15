@@ -39,7 +39,7 @@ The thumbd server:
 	* HTTP resources are prefixed with `http://` or `https://`.
 	* S3 resources are a path to the image in the S3 bucket indicated by the `BUCKET` environment variable.
 * Uses ImageMagick to perform a set of transformations on the image.
-* uploads the thumbnails created back to S3, with the following naming convention: `[original filename excluding extension]\_[thumbnail suffix].[thumbnail format]`
+* uploads the thumbnails created back to S3, with the following naming convention: `[original filename excluding extension]_[thumbnail suffix].[thumbnail format]`
 
 Assume that the following thumbnail job was received over SQS:
 
