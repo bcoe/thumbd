@@ -13,7 +13,7 @@
     "node"
   ],
   "scripts": {
-    "test": "make test"
+    "test": "node_modules/.bin/mocha -u bdd -R nyan"
   },
   "description": "Node.js/AWS/ImageMagick-based image thumbnailing service.",
   "keywords": [
