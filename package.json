@@ -1,6 +1,6 @@
 {
   "name": "thumbd",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "directories": {
     "lib": "./lib",
     "bin": "./bin",
@@ -13,7 +13,7 @@
     "node"
   ],
   "scripts": {
-    "test": "make test"
+    "test": "node_modules/.bin/mocha -u bdd -R nyan"
   },
   "description": "Node.js/AWS/ImageMagick-based image thumbnailing service.",
   "keywords": [
