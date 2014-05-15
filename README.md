@@ -125,7 +125,7 @@ _description_ accepts the following keys:
 	* **bounded (default):** maintain aspect ratio, don't place image on matte.
 	* **matted:** maintain aspect ratio, places image on _width x height_ matte.
 	* **fill:** both resizes and zooms into an image, filling the specified dimensions.
-  * **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
+	* **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
 	* **manual:** allows for a custom convert command to be passed in:
 	  * `%(command)s -border 0 %(localPaths[0])s %(convertedPath)s`
 * **quality:** the quality of the thumbnail, in percent. e.g. `90`.
@@ -200,4 +200,4 @@ thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnail
 Copyright
 ---------
 
-Copyright (c) 2012 Attachments.me. See LICENSE.txt for further details.
+Copyright (c) 2014 Contributors, See LICENSE.txt for further details.
