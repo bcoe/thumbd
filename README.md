@@ -19,18 +19,15 @@ Thumbd requires the following environment variables to be set:
 
 * **AWS_KEY** the key for your AWS account (the IAM user must have access to the appropriate SQS and S3 resources).
 * **AWS_SECRET** the AWS secret key.
-* **AWS_REGION** the AWS Region of the bucket. Defaults to: `us-east-1`.
 * **BUCKET** the bucket to download the original images from. The thumbnails will also be placed in this bucket.
+* **AWS_REGION** the AWS Region of the bucket. Defaults to: `us-east-1`.
 * **CONVERT_COMMAND** the ImageMagick convert command. Defaults to `convert`.
 * **REQUEST_TIMEOUT** how long to wait in milliseconds before aborting a remote request. Defaults to `15000`.
 * **S3_ACL** the acl to set on the uploaded images. Must be one of `private`, or `public-read`. Defaults to `private`.
 * **S3_STORAGE_CLASS** the storage class for the uploaded images. Must be either `STANDARD` or `REDUCED_REDUNDANCY`. Defaults to `STANDARD`.
 * **SQS_QUEUE** the queue name to listen for image thumbnailing.
-	* As of version 2.0.0, the integer identifier from the queue URL is no longer required.
 
-You can export these variables to your environment, or specify them when running the thumbd CLI.
-
-Personally, I set these environment variables in a .env file and execute thumbd using Foreman.
+When running locally, I set these environment variables in a .env file and execute thumbd using Foreman.
 
 Server
 ------
@@ -39,10 +36,10 @@ The thumbd server:
 
 * listens for thumbnailing jobs on the queue specified.
 * downloads the original image from our thumbnailng S3 bucket, or from an HTTP(s) resource.
-	* HTTP resources are prefixed with __http://__ or __https://__.
-	* S3 resources are a path to the image in the S3 bucket indicated by the __BUCKET__ environment variable.
+	* HTTP resources are prefixed with `http://` or `https://`.
+	* S3 resources are a path to the image in the S3 bucket indicated by the `BUCKET` environment variable.
 * Uses ImageMagick to perform a set of transformations on the image.
-* uploads the thumbnails created back to S3, with the following naming convention: [original filename excluding extension]\_[thumbnail suffix].jpg
+* uploads the thumbnails created back to S3, with the following naming convention: `[original filename excluding extension]\_[thumbnail suffix].[thumbnail format]`
 
 Assume that the following thumbnail job was received over SQS:
 
@@ -81,7 +78,7 @@ Once thumbd processes the job, the files stored in S3 will look something like t
 Client
 ------
 
-Submit thumbnailing jobs from your application by creating an instance of a thumbd client (clients will soon be offered for other languages).
+Submit thumbnailing jobs from your application by creating an instance of a thumbd client (contribute by submitting clients in other languages).
 
 ```javascript
 var Client = require('./thumbd').Client,
@@ -108,17 +105,19 @@ The descriptions received in the thumbnail job describe the way in which thumbna
 
 _description_ accepts the following keys:
 
-* **suffix** a suffix describing the thumbnail.
-* **width** the width of the thumbnail.
-* **height** the height of the thumbnail.
-* **background** background color for matte.
-* **format** what should the output format of the image be, e.g., `jpg`, `gif`, defaults to `jpg`.
-* **strategy** indicate an approach for creating the thumbnail.
-	* **matted** maintain aspect ratio, places image on _width x height_ matte.
-	* **bounded (default)** maintain aspect ratio, don't place image on matte.
-	* **fill** both resizes and zooms into an image, filling the specified dimensions.
-    * **strict** resizes the image, filling the specified dimensions changing the aspect ratio
-* **quality** the quality of the thumbnail, in percent. e.g. `90`.
+* **suffix:** a suffix describing the thumbnail.
+* **width:** the width of the thumbnail.
+* **height:** the height of the thumbnail.
+* **background:** background color for matte.
+* **format:** what should the output format of the image be, e.g., `jpg`, `gif`, defaults to `jpg`.
+* **strategy:** indicate an approach for creating the thumbnail.
+	* **bounded (default):** maintain aspect ratio, don't place image on matte.
+	* **matted:** maintain aspect ratio, places image on _width x height_ matte.
+	* **fill:** both resizes and zooms into an image, filling the specified dimensions.
+  * **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
+	* **manual:** allows for a custom convert command to be passed in:
+	  * `%(command)s -border 0 %(localPaths[0])s %(convertedPath)s`
+* **quality:** the quality of the thumbnail, in percent. e.g. `90`.
 
 CLI
 ---
@@ -138,10 +137,32 @@ thumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path 
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
 * **thumbnail_descriptions** the path to a JSON file describing the dimensions of the thumbnails that should be created (see _example.json_ in the _data_ directory).
 
+Advanced Options
+----------------
+
+* **Creating a Mosaic:** Rather than performing an operation on a single S3 resource, you can perform an operation on a set
+of S3 resources. A great example of this would be converting a set of images into a mosaic:
+
+```json
+{
+	"resources": [
+		"images/image1.png",
+		"images/image2.png"
+	],
+	"descriptions": [{
+		"strategy": "%(command)s -border 0 -tile 2x1 -geometry 160x106 '%(localPaths[0])s' '%(localPaths[1])s' %(convertedPath)s",
+		"command": "montage",
+		"suffix": "stitch"
+	}]
+}
+```
+
+The custom strategy can be used for a variety of purposes, _experiment with it :tm:_
+
 Production Notes
 ----------------
 
-At Attachments.me, thumbd thumbnails tens of thousands of images a day. There are a few things you should know about our production deployment:
+At Attachments.me, thumbd thumbnailed tens of thousands of images a day. There are a few things you should know about our production deployment:
 
 ![Thumbd in Production](https://dl.dropboxusercontent.com/s/r2sce6tekfsvolt/thumbnailer.png?token_hash=AAHI0ARNhPdra24jqmDFpoC7nNiNTL8ELwOtaQB_YqVwpg "Thumbd in Production")
 
@@ -149,7 +170,6 @@ At Attachments.me, thumbd thumbnails tens of thousands of images a day. There ar
 	* it is run with an Upstart script, which keeps the thumbnailing process on its feet.
 * Node.js is a single process, this does not take advantage of multi-processor environments.
 	* we run an instance of thumbd per-CPU on our servers.
-* we use Foreman's export functionality to simplify the process of creating Upstart scripts.
 * be midful of the version of ImageMagick you are running:
 	* make sure that you build it with the appropriate extensions for images you would like to support.
 	* we've had issues with some versions of ImageMagick, we run 6.6.2-6 in production.
@@ -161,7 +181,10 @@ At Attachments.me, thumbd thumbnails tens of thousands of images a day. There ar
 The Future
 ----------
 
-thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback.
+thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback:
+
+* **If you create a client in a language other than JavaScript, let me know.**
+* **If you build something cool using thumbd, I will list it here.
 
 Copyright
 ---------
