@@ -106,7 +106,7 @@ client.upload('/tmp/awesome.jpg', destination, function(err) {
 * **originalImagePaths:** `string` or `array`, path to image or images that thumbnailing should be applied to.
 * **thumbnailDescriptions:** `array` describing the thumbnails that should be created.
 * **opts:** additional thumbnailing options.
-  * **notify:** webhook to notify when thumbnailing is complete.
+	* **notify:** webhook to notify when thumbnailing is complete.
 	* **prefix:** prefix for thumbnails created (defaults to original filename).
 
 Thumbnail Descriptions
