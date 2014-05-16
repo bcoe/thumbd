@@ -36,6 +36,23 @@ describe('thumbnail', function() {
     client.thumbnail('/foo/bar.jpg', [], {prefix: '/banana'});
   });
 
+  it("should allow arbitrary additional parameters to be set in opts", function(done) {
+    var client = new Client({
+      sqs: {
+        sendMessage: function(sqsObject) {
+          var obj = JSON.parse(
+            sqsObject.MessageBody
+          )
+          assert.equal(obj.foo, 'bar');
+          done();
+        },
+        endpoint: {} // adhere to SQS contract.
+      },
+    });
+
+    client.thumbnail('/foo/bar.jpg', [], {foo: 'bar'});
+  });
+
   it('should execute callback when it is the third parameter', function(done) {
     var client = new Client({
       sqs: {

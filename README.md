@@ -189,13 +189,15 @@ At Attachments.me, thumbd thumbnailed tens of thousands of images a day. There a
 	* we use long-polling to reduce the latency time before a message is read.
 * in production, thumbd runs on Node 0.8.x. It has not been thoroughly tested with Streams 2.
 
-The Future
-----------
+Projects Using Thumbd
+--------------------
 
-thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback:
+**If you build something cool using thumbd let me know, I will list it here.**
 
-* **If you create a client in a language other than JavaScript, let me know.**
-* **If you build something cool using thumbd let me know, I will list it here.**
+* **[Popbasic](https://popbasic.com)**: designs limited edition, high quality clothing.
+* **[ineffable](https://github.com/taeram/ineffable/):** A minimalist photo album powered by Flask and React.
+* **[s3-gif](https://github.com/taeram/s3-gif):** Host your GIF collection on Heroku + Amazon S3.
+* **attachments.me**: created a searchable, visual, index of all of your email attachments (sadly defunct).
 
 Copyright
 ---------
