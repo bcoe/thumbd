@@ -39,7 +39,7 @@ The thumbd server:
 	* HTTP resources are prefixed with `http://` or `https://`.
 	* S3 resources are a path to the image in the S3 bucket indicated by the `BUCKET` environment variable.
 * Uses ImageMagick to perform a set of transformations on the image.
-* uploads the thumbnails created back to S3, with the following naming convention: `[original filename excluding extension]\_[thumbnail suffix].[thumbnail format]`
+* uploads the thumbnails created back to S3, with the following naming convention: `[original filename excluding extension]_[thumbnail suffix].[thumbnail format]`
 
 Assume that the following thumbnail job was received over SQS:
 
@@ -94,9 +94,20 @@ var destination = '/example/awesome.jpg';
 
 client.upload('/tmp/awesome.jpg', destination, function(err) {
 	if (err) throw err;
-	client.thumbnail(destination, [{suffix: 'small', width: 100, height: 100, background: 'red', strategy: 'matted'}]);
+	client.thumbnail(originalImagePaths, [{suffix: 'small', width: 100, height: 100, background: 'red', strategy: 'matted'}], {
+		notify: 'https://callback.example.com', // optional web-hook when processing is done.
+		prefix: 'foobar' // optional prefix for thumbnails created.
+	});
 });
 ```
+
+**Thumbnailing options:**
+
+* **originalImagePaths:** `string` or `array`, path to image or images that thumbnailing should be applied to.
+* **thumbnailDescriptions:** `array` describing the thumbnails that should be created.
+* **opts:** additional thumbnailing options.
+	* **notify:** webhook to notify when thumbnailing is complete.
+	* **prefix:** prefix for thumbnails created (defaults to original filename).
 
 Thumbnail Descriptions
 ----------------------
@@ -114,7 +125,7 @@ _description_ accepts the following keys:
 	* **bounded (default):** maintain aspect ratio, don't place image on matte.
 	* **matted:** maintain aspect ratio, places image on _width x height_ matte.
 	* **fill:** both resizes and zooms into an image, filling the specified dimensions.
-  * **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
+	* **strict:** resizes the image, filling the specified dimensions changing the aspect ratio
 	* **manual:** allows for a custom convert command to be passed in:
 	  * `%(command)s -border 0 %(localPaths[0])s %(convertedPath)s`
 * **quality:** the quality of the thumbnail, in percent. e.g. `90`.
@@ -137,7 +148,7 @@ thumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path 
 * **remote_image** indicates the S3 object to perform the thumbnailing operations on.
 * **thumbnail_descriptions** the path to a JSON file describing the dimensions of the thumbnails that should be created (see _example.json_ in the _data_ directory).
 
-Advanced Options
+Advanced Tips and Tricks
 ----------------
 
 * **Creating a Mosaic:** Rather than performing an operation on a single S3 resource, you can perform an operation on a set
@@ -178,15 +189,17 @@ At Attachments.me, thumbd thumbnailed tens of thousands of images a day. There a
 	* we use long-polling to reduce the latency time before a message is read.
 * in production, thumbd runs on Node 0.8.x. It has not been thoroughly tested with Streams 2.
 
-The Future
-----------
+Projects Using Thumbd
+--------------------
 
-thumbd is a rough first pass at creating an efficient, easy to deploy, thumbnailing pipeline. Please be liberal with your feature-requests, patches, and feedback:
+**If you build something cool using thumbd let me know, I will list it here.**
 
-* **If you create a client in a language other than JavaScript, let me know.**
-* **If you build something cool using thumbd let me know, I will list it here.**
+* **[Popbasic](https://popbasic.com)**: designs limited edition, high quality clothing.
+* **[ineffable](https://github.com/taeram/ineffable/):** A minimalist photo album powered by Flask and React.
+* **[s3-gif](https://github.com/taeram/s3-gif):** Host your GIF collection on Heroku + Amazon S3.
+* **attachments.me**: created a searchable, visual, index of all of your email attachments (sadly defunct).
 
 Copyright
 ---------
 
-Copyright (c) 2012 Attachments.me. See LICENSE.txt for further details.
+Copyright (c) 2014 Contributors, See LICENSE.txt for further details.
