@@ -7,7 +7,9 @@
     "data": "./data"
   },
   "main": "./lib/index.js",
-  "bin": "./bin/thumbd.js",
+  "bin": {
+    "thumbd": "./bin/thumbd.js"
+  },
   "author": "Ben Coe <bencoe@gmail.com>",
   "engines": [
     "node"
@@ -23,6 +25,27 @@
     "imagemagick",
     "sqs"
   ],
+  "ndm": {
+    "bin": "thumbd",
+    "env": {
+      "AWS_KEY": {
+        "description": "What is your AWS Key (used by SQS and S3)"
+      },
+      "AWS_SECRET": {
+        "description": "What is your AWS secret (used by SQS and S3)"
+      },
+      "BUCKET": {
+        "description": "What S3 bucket would you like to store converted thumbnails in"
+      },
+      "TMP_DIR": {
+        "default": "/tmp",
+        "description": "what folder should thumbd use for temporary files"
+      },
+      "SQS_QUEUE": {
+        "description": "What SQS queue should thumbd fetch work from"
+      }
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/bcoe/thumbd.git"
