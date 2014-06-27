@@ -42,7 +42,7 @@
         "description": "what folder should thumbd use for temporary files"
       },
       "SQS_QUEUE": {
-        "What SQS queue should thumbd fetch work from"
+        "description": "What SQS queue should thumbd fetch work from"
       }
     }
   },
