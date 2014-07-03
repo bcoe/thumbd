@@ -1,6 +1,6 @@
 {
   "name": "thumbd",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "directories": {
     "lib": "./lib",
     "bin": "./bin",
@@ -28,7 +28,7 @@
   "ndm": {
     "bin": "thumbd",
     "args": {
-      "start": ""
+      "server": ""
     },
     "env": {
       "AWS_REGION": {
@@ -50,6 +50,10 @@
       },
       "SQS_QUEUE": {
         "description": "What SQS queue should thumbd fetch work from"
+      },
+      "CONVERT_COMMAND": {
+        "default": "/usr/local/bin/convert",
+        "description": "Absolute path to ImageMagick bin"
       }
     }
   },

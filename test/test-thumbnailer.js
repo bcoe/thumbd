@@ -72,6 +72,30 @@ describe("Thumbnailer", function() {
 
     });
 
+    describe('matted', function() {
+
+      it('generates appropriate convert command for matted strategy', function() {
+        var convertCommand = 'convert "/tmp/444.png[0]" -resize 96X96 -size 96X96 xc:black +swap -gravity center -composite /tmp/222.jpg';
+
+        // We don't actually want to execute the
+        // convert command.
+        var mock = sinon.mock(this.thumbnailer)
+          .expects('execCommand')
+          .once()
+          .withArgs(convertCommand);
+
+        this.thumbnailer.execute({
+          width: 96,
+          height: 96,
+          format: 'png',
+          strategy: 'matted'
+        }, '/tmp/444.png');
+
+        mock.verify();
+      });
+
+    });
+
     describe('bounded', function() {
 
       it('generates appropriate convert command generated if no quality set', function() {
