@@ -27,7 +27,14 @@
   ],
   "ndm": {
     "bin": "thumbd",
+    "args": {
+      "start": ""
+    },
     "env": {
+      "AWS_REGION": {
+        "default": "us-east-1",
+        "description": "Default AWS region for SQS and S3"
+      },
       "AWS_KEY": {
         "description": "What is your AWS Key (used by SQS and S3)"
       },
