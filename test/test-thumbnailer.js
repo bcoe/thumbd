@@ -48,6 +48,30 @@ describe("Thumbnailer", function() {
       this.thumbnailer.execCommand.restore();
     });
 
+    describe('strict', function() {
+
+      it('generates appropriate convert command', function() {
+        var convertCommand = 'convert "/tmp/333.png[0]" -resize 96X96!  /tmp/222.jpg';
+
+        // We don't actually want to execute the
+        // convert command.
+        var mock = sinon.mock(this.thumbnailer)
+          .expects('execCommand')
+          .once()
+          .withArgs(convertCommand);
+
+        this.thumbnailer.execute({
+          width: 96,
+          height: 96,
+          format: 'png',
+          strategy: 'strict'
+        }, '/tmp/333.png');
+
+        mock.verify();
+      });
+
+    });
+
     describe('bounded', function() {
 
       it('generates appropriate convert command generated if no quality set', function() {
