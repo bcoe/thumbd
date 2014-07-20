@@ -61,7 +61,7 @@ switch (mode) {
 			bucket: config.get('s3Bucket'),
 			region: config.get('awsRegion')
 		}
-		
+
 		// Knox wants 'us-standard' instead of 'us-east-1'
 		if (config.get('awsRegion') == 'us-east-1') {
 			knoxOpts.region = 'us-standard';
