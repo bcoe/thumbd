@@ -1,6 +1,6 @@
 {
   "name": "thumbd",
-  "version": "2.10.2",
+  "version": "2.10.3",
   "directories": {
     "lib": "./lib",
     "bin": "./bin",
@@ -25,7 +25,7 @@
     "imagemagick",
     "sqs"
   ],
-  "ndm": {
+  "environment": {
     "bin": "thumbd",
     "args": {
       "server": ""
