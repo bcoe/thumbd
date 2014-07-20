@@ -28,9 +28,6 @@
   ],
   "environment": {
     "bin": "thumbd",
-    "args": {
-      "server": ""
-    },
     "env": {
       "AWS_REGION": {
         "default": "us-east-1",
