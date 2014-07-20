@@ -15,7 +15,8 @@
     "node"
   ],
   "scripts": {
-    "test": "node_modules/.bin/mocha -u bdd -R nyan"
+    "test": "mocha -u bdd -R nyan",
+    "start": "./bin/thumbd.js server"
   },
   "description": "Node.js/AWS/ImageMagick-based image thumbnailing service.",
   "keywords": [
