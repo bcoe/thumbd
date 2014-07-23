@@ -67,10 +67,8 @@ switch (mode) {
 			knoxOpts.region = 'us-standard';
 		}
 
-		var s3 = knox.createClient(knoxOpts);
-
-		var grabber = new thumbd.Grabber(s3);
-		var saver = new thumbd.Saver(s3);
+		var grabber = new thumbd.Grabber();
+		var saver = new thumbd.Saver();
 		var thumbnailer = new thumbd.Thumbnailer();
 
 		(new thumbd.Worker({
