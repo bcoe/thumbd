@@ -108,6 +108,8 @@ client.upload('/tmp/awesome.jpg', destination, function(err) {
 * **opts:** additional thumbnailing options.
 	* **notify:** webhook to notify when thumbnailing is complete.
 	* **prefix:** prefix for thumbnails created (defaults to original filename).
+	* **bucket:** bucket to download image from (defaults to server's default bucket).
+	* **region:** aws-region to download image from (defaults to server's default region).
 
 Thumbnail Descriptions
 ----------------------
@@ -167,6 +169,11 @@ of S3 resources. A great example of this would be converting a set of images int
 	}]
 }
 ```
+
+* **Creating Video Thumbnails on Heroku**
+
+* install the [ffmpeg](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) custom buildpack.
+* use a custom strategy that utilizes `ffmpeg` for thumbnail generation, rather than `convert`.
 
 The custom strategy can be used for a variety of purposes, _experiment with it :tm:_
 
