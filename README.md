@@ -7,6 +7,8 @@ Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and Ima
 
 You can easily run Thumbd on *Heroku*. Simply set the appropriate environment variables with _config:set_ and deploy using the _Procfile_ provided.
 
+Note: Creating video thumbnails on Heroku requires use of custom [ffmpeg](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) buildpack. Please refer to [Heroku deployment guide](https://github.com/bcoe/thumbd/wiki/Running-Thumbd-on-Heroku) in Wiki.
+
 Setup
 -----
 
@@ -170,10 +172,14 @@ of S3 resources. A great example of this would be converting a set of images int
 }
 ```
 
-* **Creating Video Thumbnails on Heroku**
+**Creating Video Thumbnails on Heroku**
+
+Creating video thumbnails on Heroku requires using custom buildpack. In short :
 
 * install the [ffmpeg](https://github.com/shunjikonishi/heroku-buildpack-ffmpeg) custom buildpack.
 * use a custom strategy that utilizes `ffmpeg` for thumbnail generation, rather than `convert`.
+
+For detailed instructions, please refer to [Heroku deployment guide](https://github.com/bcoe/thumbd/wiki/Running-Thumbd-on-Heroku) in Wiki.
 
 The custom strategy can be used for a variety of purposes, _experiment with it :tm:_
 
