@@ -17,6 +17,14 @@ apt-get install imagemagick
 npm install thumbd
 ```
 
+To install thumbd as a service:
+
+```
+npm insall thumbd -g
+thumbd install
+thumbd start
+```
+
 Thumbd requires the following environment variables to be set:
 
 * **AWS_KEY** the key for your AWS account (the IAM user must have access to the appropriate SQS and S3 resources).
