@@ -3,7 +3,63 @@
 var thumbd = require('../lib'),
 	_ = require('underscore'),
 	fs = require('fs'),
-	argv = require('optimist').argv,
+	opt = require('optimist')
+		.option('k', {
+			alias: 'aws_key',
+			description: 'AWS key id',
+			required: true
+		})
+		.option('s', {
+			alias: 'aws_secret',
+			required: true,
+			description: 'AWS key secret'
+		})
+		.option('q', {
+			alias: 'sqs_queue',
+			required: true,
+			description: 'AWS SQS queue'
+		})
+		.option('b', {
+			alias: 'bucket',
+			required: true,
+			description: 'AWS S3 bucket'
+		})
+		.option('t', {
+			alias: 'tmp_dir',
+			description: 'temporary directory for image conversion'
+		})
+		.option('v', {
+			alias: 'convert_command',
+			description: 'convert command to use'
+		})
+		.option('a', {
+			alias: 's3_acl',
+			description: 'default S3 ACL'
+		})
+		.option('o', {
+			alias: 's3_storage_class',
+			description: 'S3 storage class'
+		})
+		.option('r', {
+			alias: 'remote_image',
+			description: 'path to image on S3 (used by thumbnail command)'
+		})
+		.option('d', {
+			alias: 'descriptions',
+			description: 'path to JSON manifest describing thumbnail conversions (used by thumbnail command)'
+		})
+		.usage(
+			"Usage: thumbd <command>\n\n" +
+			"where <command> is one of:\n\n" +
+			"\tthumbd server\tstart a thumbnailing server\n" +
+			"\tthumbd thumbnail\tgiven S3 path and description, thumbnail an image\n" +
+			"\tthumbd install\t install thumbd as OS service\n" +
+			"\tthumbd start\t start the thumbd service\n" +
+			"\tthumbd stop\t start the thumbd service\n" +
+			"\tthumbd restart\t start the thumbd service\n" +
+			"\tthumbd remove\t remove the thumbd service"
+		),
+	argv = opt.argv,
 	mode = argv._.shift(),
 	config = require('../lib/config').Config,
 	serverOpts = {
@@ -25,7 +81,8 @@ var thumbd = require('../lib'),
 		remote_image: 'remoteImage',
 		sqs_queue: 'sqsQueue',
 		bucket: 's3Bucket'
-	};
+	},
+	ndm = require('ndm')('thumbd');
 
 /**
  * Extract the command line parameters
@@ -91,11 +148,27 @@ switch (mode) {
 			}
 		);
 		break;
+  case 'install':
+    ndm.install();
+    break;
+  case 'remove':
+    ndm.remove();
+    break;
+  case 'start':
+    ndm.start();
+    break;
+  case 'restart':
+    ndm.restart();
+    break;
+  case 'stop':
+    ndm.stop();
+    break;
+  case 'list-scripts':
+    ndm.listScripts();
+    break;
+  case 'run-script':
+    ndm.runScript();
+    break;
 	default:
-		console.log(
-			"Usage: thumbd <command>\n\n",
-			"where <command> is one of:\n\n",
-			"\tthumbd server --aws_key=<key> --aws_secret=<secret> --tmp_dir=</tmp> --sqs_queue=<sqs queue name> --bucket=<default s3 bucket> --s3_acl=<private or public-read> --s3_storage_class=<STANDARD or REDUCED_REDUNDANCY>\n\n",
-			"\tthumbd thumbnail --remote_image=<path to image s3 or http> --descriptions=<path to thumbnail description JSON file> --aws_key=<key> --aws_secret=<secret> --sqs_queue=<sqs queue name> --bucket=<s3 bucket> --region=<s3 region>\n"
-		);
+		console.log(opt.help());
 }
