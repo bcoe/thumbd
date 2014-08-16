@@ -1,5 +1,44 @@
 var assert = require('assert'),
-  Client = require('../lib').Client;
+  Client = require('../lib').Client,
+  config = require('../lib').Config;
+
+describe('upload', function() {
+  it("should call saver with default bucket and region", function(done) {
+    var Saver = function() {},
+      client = new Client({
+        Saver: Saver
+      });
+
+    Saver.prototype.save = function(bucket, region, source, destination, callback) {
+      assert.equal(bucket, 'foo-bucket');
+      assert.equal(region, 'us-east-1');
+      done();
+    };
+
+    config.set('s3Bucket', 'foo-bucket');
+    client.upload('/foo.jpg', '/bar/snuh.jpg', {}, function() {});
+  });
+
+  it("should allow bucket and region to be overridden", function(done) {
+    var Saver = function() {},
+      client = new Client({
+        Saver: Saver
+      });
+
+    Saver.prototype.save = function(bucket, region, source, destination, callback) {
+      assert.equal(bucket, 'bar-bucket');
+      assert.equal(region, 'us-west-1');
+      done();
+    };
+
+    config.set('s3Bucket', 'foo-bucket');
+    client.upload('/foo.jpg', '/bar/snuh.jpg', {
+      awsRegion: 'us-west-1',
+      s3Bucket: 'bar-bucket'
+    }, function() {});
+  });
+
+});
 
 describe('thumbnail', function() {
   it("should create prefix based on originalImagePath", function(done) {
