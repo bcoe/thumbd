@@ -48,6 +48,11 @@ var thumbd = require('../lib'),
 			alias: 'descriptions',
 			description: 'path to JSON manifest describing thumbnail conversions (used by thumbnail command)'
 		})
+		.option('p', {
+			alias: 'profile',
+			type: 'boolean',
+			description: 'start thumbd with profiler running'
+		})
 		.usage(
 			"Usage: thumbd <command>\n\n" +
 			"where <command> is one of:\n\n" +
@@ -105,6 +110,9 @@ function buildOpts(keys) {
 	}
 	return opts;
 }
+
+// start a profiling server.
+if (argv.profile) require('look').start();
 
 switch (mode) {
 	case 'server':
