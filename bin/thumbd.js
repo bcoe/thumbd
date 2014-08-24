@@ -128,9 +128,6 @@ function buildOpts(keys) {
 	return opts;
 }
 
-// start a profiling server.
-if (argv.profile) require('look').start();
-
 switch (mode) {
 	case 'server':
 
@@ -199,3 +196,6 @@ switch (mode) {
 	default:
 		console.log(opt.help());
 }
+
+// start a profiling server.
+if (config.get('profile')) require('look').start(process.env.PORT || 5959, '127.0.0.1');
