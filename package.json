@@ -66,10 +66,10 @@
     "sprintf-js": "0.0.7",
     "tmp": "~0.0.16",
     "underscore": "~1.4.2",
-    "look": "^0.1.3"
   },
   "devDependencies": {
     "mocha": "~1.7.4",
-    "sinon": "~1.6.0"
+    "sinon": "~1.6.0",
+    "look": "^0.1.3"
   }
 }
