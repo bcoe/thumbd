@@ -85,7 +85,8 @@ var thumbd = require('../lib'),
 		s3_storage_class: 's3StorageClass',
 		sqs_queue: 'sqsQueue',
 		tmp_dir: 'tmpDir',
-		log_level: 'logLevel'
+		log_level: 'logLevel',
+		profile: 'profile'
 	},
 	thumbnailOpts = {
 		aws_key: 'awsKey',
