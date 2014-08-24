@@ -59,7 +59,6 @@ var thumbd = require('../lib'),
 		})
 		.option('l', {
 			alias: 'log_level',
-			default: 'info',
 			description: 'set log level (info|warn|error|silent)'
 		})
 		.usage(
@@ -198,4 +197,4 @@ switch (mode) {
 }
 
 // start a profiling server.
-if (config.get('profile')) require('look').start(process.env.PORT || 5959, '0.0.0.0');
+if (config.get('profile')) require('look').start(process.env.PORT || 5959);
