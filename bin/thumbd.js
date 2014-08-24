@@ -16,7 +16,6 @@ var thumbd = require('../lib'),
 		})
 		.option('e', {
 			alias: 'aws_region',
-			default: 'us-east-1',
 			description: 'AWS Region'
 		})
 		.option('q', {
