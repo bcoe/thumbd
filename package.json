@@ -65,7 +65,7 @@
     "request": "~2.34.0",
     "sprintf-js": "0.0.7",
     "tmp": "~0.0.16",
-    "underscore": "~1.4.2",
+    "underscore": "~1.4.2"
   },
   "devDependencies": {
     "mocha": "~1.7.4",
