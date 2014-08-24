@@ -66,13 +66,13 @@ var thumbd = require('../lib'),
 		.usage(
 			"Usage: thumbd <command>\n\n" +
 			"where <command> is one of:\n\n" +
-			"\tthumbd server\tstart a thumbnailing server\n" +
+			"\tthumbd server\t\tstart a thumbnailing server\n" +
 			"\tthumbd thumbnail\tgiven S3 path and description, thumbnail an image\n" +
-			"\tthumbd install\t install thumbd as OS service\n" +
-			"\tthumbd start\t start the thumbd service\n" +
-			"\tthumbd stop\t start the thumbd service\n" +
-			"\tthumbd restart\t start the thumbd service\n" +
-			"\tthumbd remove\t remove the thumbd service"
+			"\tthumbd install\t\tinstall thumbd as OS service\n" +
+			"\tthumbd start\t\tstart the thumbd service\n" +
+			"\tthumbd stop\t\tstart the thumbd service\n" +
+			"\tthumbd restart\t\tstart the thumbd service\n" +
+			"\tthumbd remove\t\tremove the thumbd service"
 		),
 	argv = opt.argv,
 	mode = argv._.shift(),
