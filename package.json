@@ -57,15 +57,15 @@
     "url": "git://github.com/bcoe/thumbd.git"
   },
   "dependencies": {
-    "async": "~0.2.7",
-    "aws-sdk": "~1.7.1",
-    "knox": "~0.8.0",
-    "ndm": "^3.2.1",
-    "optimist": "~0.3.4",
-    "request": "~2.34.0",
+    "async": "^0.9.0",
+    "aws-sdk": "^2.0.15",
+    "knox": "^0.9.0",
+    "lodash": "^2.4.1",
+    "ndm": "^3.3.1",
+    "optimist": "^0.6.1",
+    "request": "^2.40.0",
     "sprintf-js": "0.0.7",
-    "tmp": "~0.0.16",
-    "underscore": "~1.4.2"
+    "tmp": "~0.0.16"
   },
   "devDependencies": {
     "mocha": "~1.7.4",

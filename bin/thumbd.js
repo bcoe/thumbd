@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var thumbd = require('../lib'),
-	_ = require('underscore'),
+	_ = require('lodash/dist/lodash.underscore'),
 	fs = require('fs'),
 	opt = require('optimist')
 		.option('k', {
@@ -153,7 +153,7 @@ switch (mode) {
 
 		// allow region/bucket to vary on a job by job basis.
 		if (argv.bucket) extraOpts.bucket = argv.bucket;
-		if (argv.region) extraOpts.region = argv.region;
+		if (argv.aws_region) extraOpts.region = argv.aws_region;
 
 		config.extend(opts);
 
