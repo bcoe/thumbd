@@ -9,9 +9,9 @@
   "main": "./lib/index.js",
   "bin": "./bin/thumbd.js",
   "author": "Ben Coe <bencoe@gmail.com>",
-  "engines": [
-    "node"
-  ],
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
     "test": "mocha -u bdd -R nyan",
     "start": "./bin/thumbd.js server"

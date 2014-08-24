@@ -121,7 +121,7 @@ function buildOpts(keys) {
 		var envKey = argvKey.toUpperCase();
 		var configKey = pairs[i][1];
 		opts[configKey] = argv[argvKey] || config.get(configKey);
-		if (!opts[configKey]) {
+		if (opts[configKey] === null) {
 			throw Error("The environment variable '" + envKey + "', or command line parameter '--" + argvKey + "' must be set.");
 		}
 	}
