@@ -68,6 +68,7 @@
     "underscore": "~1.4.2"
   },
   "devDependencies": {
+    "look": "^0.1.3",
     "mocha": "~1.7.4",
     "sinon": "~1.6.0"
   }
