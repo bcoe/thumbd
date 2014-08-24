@@ -198,4 +198,4 @@ switch (mode) {
 }
 
 // start a profiling server.
-if (config.get('profile')) require('look').start(process.env.PORT || 5959, '127.0.0.1');
+if (config.get('profile')) require('look').start(process.env.PORT || 5959, '0.0.0.0');
