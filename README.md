@@ -20,7 +20,7 @@ npm install thumbd
 To install thumbd as a service:
 
 ```
-npm insall thumbd -g
+npm install thumbd -g
 thumbd install
 thumbd start
 ```
