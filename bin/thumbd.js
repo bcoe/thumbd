@@ -14,6 +14,11 @@ var thumbd = require('../lib'),
 			required: true,
 			description: 'AWS key secret'
 		})
+		.option('e', {
+			alias: 'aws_region',
+			default: 'us-east-1',
+			description: 'AWS Region'
+		})
 		.option('q', {
 			alias: 'sqs_queue',
 			required: true,
@@ -53,16 +58,21 @@ var thumbd = require('../lib'),
 			type: 'boolean',
 			description: 'start thumbd with profiler running'
 		})
+		.option('l', {
+			alias: 'log_level',
+			default: 'info',
+			description: 'set log level (info|warn|error|silent)'
+		})
 		.usage(
 			"Usage: thumbd <command>\n\n" +
 			"where <command> is one of:\n\n" +
-			"\tthumbd server\tstart a thumbnailing server\n" +
+			"\tthumbd server\t\tstart a thumbnailing server\n" +
 			"\tthumbd thumbnail\tgiven S3 path and description, thumbnail an image\n" +
-			"\tthumbd install\t install thumbd as OS service\n" +
-			"\tthumbd start\t start the thumbd service\n" +
-			"\tthumbd stop\t start the thumbd service\n" +
-			"\tthumbd restart\t start the thumbd service\n" +
-			"\tthumbd remove\t remove the thumbd service"
+			"\tthumbd install\t\tinstall thumbd as OS service\n" +
+			"\tthumbd start\t\tstart the thumbd service\n" +
+			"\tthumbd stop\t\tstart the thumbd service\n" +
+			"\tthumbd restart\t\tstart the thumbd service\n" +
+			"\tthumbd remove\t\tremove the thumbd service"
 		),
 	argv = opt.argv,
 	mode = argv._.shift(),
@@ -76,7 +86,8 @@ var thumbd = require('../lib'),
 		s3_acl: 's3Acl',
 		s3_storage_class: 's3StorageClass',
 		sqs_queue: 'sqsQueue',
-		tmp_dir: 'tmpDir'
+		tmp_dir: 'tmpDir',
+		log_level: 'logLevel'
 	},
 	thumbnailOpts = {
 		aws_key: 'awsKey',
@@ -85,9 +96,16 @@ var thumbd = require('../lib'),
 		descriptions: 'descriptions',
 		remote_image: 'remoteImage',
 		sqs_queue: 'sqsQueue',
-		bucket: 's3Bucket'
+		bucket: 's3Bucket',
+		log_level: 'logLevel'
 	},
 	ndm = require('ndm')('thumbd');
+
+// make console output nicer for missing arguments.
+process.on('uncaughtException', function(err) {
+	var logger = require('../lib/logger');
+	logger.error(err.message);
+});
 
 /**
  * Extract the command line parameters
@@ -105,7 +123,7 @@ function buildOpts(keys) {
 		var configKey = pairs[i][1];
 		opts[configKey] = argv[argvKey] || config.get(configKey);
 		if (!opts[configKey]) {
-			throw "The environment variable '" + envKey + "', or command line parameter '--" + argvKey + "' must be set.";
+			throw Error("The environment variable '" + envKey + "', or command line parameter '--" + argvKey + "' must be set.");
 		}
 	}
 	return opts;
@@ -143,15 +161,17 @@ switch (mode) {
 
 		config.extend(opts);
 
+		var logger = require('../lib/logger');
+
 		client.thumbnail(
 			opts.remoteImage,
 			JSON.parse(fs.readFileSync(opts.descriptions).toString()),
 			extraOpts,
 			function(err, res) {
 				if (err) {
-					console.log(err);
+					logger.error(err);
 				} else {
-					console.log(res);
+					logger.info(res);
 				}
 			}
 		);
