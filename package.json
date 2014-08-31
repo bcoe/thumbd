@@ -10,7 +10,7 @@
   "bin": "./bin/thumbd.js",
   "author": "Ben Coe <bencoe@gmail.com>",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.10.29"
   },
   "scripts": {
     "test": "mocha -u bdd -R nyan",
