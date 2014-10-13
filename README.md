@@ -218,6 +218,7 @@ Projects Using Thumbd
 * **[Popbasic](https://popbasic.com)**: designs limited edition, high quality clothing.
 * **[ineffable](https://github.com/taeram/ineffable/):** A minimalist photo album powered by Flask and React.
 * **[s3-gif](https://github.com/taeram/s3-gif):** Host your GIF collection on Heroku + Amazon S3.
+* **[talent-off](http://talentooff.com.br/):** Online contest for sports videos.
 * **attachments.me**: created a searchable, visual, index of all of your email attachments (sadly defunct).
 
 Copyright
