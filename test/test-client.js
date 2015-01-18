@@ -48,7 +48,7 @@ describe('Client', function() {
     });
 
     it("should allow meta-info headers to be set when uploading", function(done) {
-      var client = new Client(),
+      var client = new Client({}),
         mockUpload = nock('https://bar-bucket.s3-us-west-1.amazonaws.com', {
           reqheaders: {
             'x-amz-meta-foo': 'bar'
