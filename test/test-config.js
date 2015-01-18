@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-describe('#Config', function() {
+describe('Config', function() {
   it("should keep settings if config required multiple times", function() {
     var Config = require('../lib/config').Config;
 
