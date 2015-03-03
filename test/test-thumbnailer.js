@@ -35,7 +35,7 @@ describe("Thumbnailer", function() {
       // create a thumbnailer with some of the
       // internals stubbed out.
       this.thumbnailer = new Thumbnailer();
-      this.thumbnailer.convertedPath = '/tmp/222.jpg'
+      this.thumbnailer.convertedPath = '/tmp/222.jpg';
 
       // Simply execute callback when createConversionPath
       // is called.

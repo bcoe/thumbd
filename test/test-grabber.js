@@ -25,7 +25,7 @@ describe('Grabber', function() {
         mockDownload.done();
         assert.equal(headers['x-amz-meta-foo'], 'bar');
         return done();
-      })
+      });
     });
   });
 

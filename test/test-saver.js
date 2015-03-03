@@ -27,7 +27,7 @@ describe('Saver', function() {
       }, function(err) {
         mockUpload.done();
         return done();
-      })
+      });
     });
   });
 
