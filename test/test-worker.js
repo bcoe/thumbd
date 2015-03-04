@@ -4,6 +4,7 @@ var assert = require('assert'),
   Grabber = require('../lib').Grabber,
   nock = require('nock'),
   Saver = require('../lib').Saver,
+  Thumbnailer = require('../lib').Thumbnailer,
   Worker = require('../lib').Worker;
 
 describe('Worker', function() {

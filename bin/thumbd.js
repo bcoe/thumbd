@@ -3,30 +3,35 @@
 var thumbd = require('../lib'),
 	_ = require('lodash/dist/lodash.underscore'),
 	fs = require('fs'),
-	opt = require('optimist')
+	yargs = require('yargs')
 		.option('k', {
 			alias: 'aws_key',
 			description: 'AWS key id',
-			required: true
+			required: true,
+			default: process.env.AWS_KEY
 		})
 		.option('s', {
 			alias: 'aws_secret',
 			required: true,
-			description: 'AWS key secret'
+			description: 'AWS key secret',
+			default: process.env.AWS_SECRET
 		})
 		.option('e', {
 			alias: 'aws_region',
-			description: 'AWS Region'
+			description: 'AWS Region',
+			default: process.env.AWS_REGION
 		})
 		.option('q', {
 			alias: 'sqs_queue',
 			required: true,
-			description: 'AWS SQS queue'
+			description: 'AWS SQS queue',
+			default: process.env.SQS_QUEUE
 		})
 		.option('b', {
 			alias: 'bucket',
 			required: true,
-			description: 'AWS S3 bucket'
+			description: 'AWS S3 bucket',
+			default: process.env.BUCKET
 		})
 		.option('t', {
 			alias: 'tmp_dir',
@@ -61,18 +66,17 @@ var thumbd = require('../lib'),
 			alias: 'log_level',
 			description: 'set log level (info|warn|error|silent)'
 		})
-		.usage(
-			"Usage: thumbd <command>\n\n" +
-			"where <command> is one of:\n\n" +
-			"\tthumbd server\t\tstart a thumbnailing server\n" +
-			"\tthumbd thumbnail\tgiven S3 path and description, thumbnail an image\n" +
-			"\tthumbd install\t\tinstall thumbd as OS service\n" +
-			"\tthumbd start\t\tstart the thumbd service\n" +
-			"\tthumbd stop\t\tstart the thumbd service\n" +
-			"\tthumbd restart\t\tstart the thumbd service\n" +
-			"\tthumbd remove\t\tremove the thumbd service"
-		),
-	argv = opt.argv,
+		.usage("Usage: $0 <command>")
+		.command('server', 'start a thumbnailing server')
+		.command('thumbnail', 'given S3 path and description, thumbnail an image')
+		.command('install', 'install thumbd as OS service wrapper')
+		.command('start', 'start the thumbd service')
+		.command('stop', 'stop the thumbd service')
+		.command('restart', 'restart the thumbd service')
+		.command('remove', 'remove the thumbd service')
+		.help('h')
+		.alias('h', 'help'),
+	argv = yargs.argv,
 	mode = argv._.shift(),
 	config = require('../lib/config').Config,
 	serverOpts = {
@@ -136,19 +140,16 @@ switch (mode) {
 
 		var grabber = new thumbd.Grabber();
 		var saver = new thumbd.Saver();
-		var thumbnailer = new thumbd.Thumbnailer();
 
 		(new thumbd.Worker({
-			thumbnailer: thumbnailer,
 			saver: saver,
-			grabber: grabber
+			grabber: grabber,
 		})).start();
 		break;
 
 	case 'thumbnail':
 
 		var opts = buildOpts(thumbnailOpts),
-			client = new thumbd.Client(),
 			extraOpts = {};
 
 		// allow region/bucket to vary on a job by job basis.
@@ -157,7 +158,8 @@ switch (mode) {
 
 		config.extend(opts);
 
-		var logger = require('../lib/logger');
+		var client = new thumbd.Client(),
+			logger = require('../lib/logger');
 
 		client.thumbnail(
 			opts.remoteImage,
@@ -194,7 +196,7 @@ switch (mode) {
     ndm.runScript();
     break;
 	default:
-		console.log(opt.help());
+		yargs.showHelp();
 }
 
 // start a profiling server.
