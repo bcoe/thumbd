@@ -68,21 +68,21 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "aws-sdk": "^2.0.15",
+    "aws-sdk": "^2.1.14",
     "knox": "^0.9.0",
-    "lodash": "^2.4.1",
+    "lodash": "^3.3.1",
     "ndm": "^3.3.1",
-    "optimist": "^0.6.1",
+    "nock": "^0.57.0",
     "request": "^2.40.0",
-    "sprintf-js": "0.0.7",
-    "tmp": "~0.0.16"
+    "sprintf-js": "^1.0.2",
+    "tmp": "~0.0.16",
+    "yargs": "^3.4.5"
   },
   "devDependencies": {
     "blanket": "^1.1.6",
     "look": "^0.1.3",
     "mocha": "^2.1.0",
     "mocoverage": "^1.0.0",
-    "nock": "^0.57.0",
-    "sinon": "~1.6.0"
+    "sinon": "^1.12.2"
   }
 }

@@ -78,7 +78,7 @@ describe('Client', function() {
           sendMessage: function(sqsObject) {
             var obj = JSON.parse(
               sqsObject.MessageBody
-            )
+            );
             assert.equal(obj.prefix, '/foo/bar');
             done();
           },
@@ -95,7 +95,7 @@ describe('Client', function() {
           sendMessage: function(sqsObject) {
             var obj = JSON.parse(
               sqsObject.MessageBody
-            )
+            );
             assert.equal(obj.prefix, '/banana');
             done();
           },
@@ -112,7 +112,7 @@ describe('Client', function() {
           sendMessage: function(sqsObject) {
             var obj = JSON.parse(
               sqsObject.MessageBody
-            )
+            );
             assert.equal(obj.foo, 'bar');
             done();
           },

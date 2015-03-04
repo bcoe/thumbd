@@ -4,7 +4,7 @@ var assert = require('assert'),
   nock = require('nock');
 
 describe('Grabber', function() {
-  
+
   describe('download', function() {
 
     config.extend({
@@ -25,7 +25,7 @@ describe('Grabber', function() {
         mockDownload.done();
         assert.equal(headers['x-amz-meta-foo'], 'bar');
         return done();
-      })
+      });
     });
   });
 
