@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var thumbd = require('../lib'),
-	_ = require('lodash/dist/lodash.underscore'),
+	_ = require('lodash'),
 	fs = require('fs'),
 	yargs = require('yargs')
 		.option('k', {
