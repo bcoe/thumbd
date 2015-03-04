@@ -21,6 +21,9 @@ var thumbd = require('../lib'),
 			description: 'AWS Region',
 			default: process.env.AWS_REGION
 		})
+		.option('image_region', {
+			description: 'region of S3 image, if it differes from the default AWS_REGION'
+		})
 		.option('q', {
 			alias: 'sqs_queue',
 			required: true,
@@ -143,7 +146,7 @@ switch (mode) {
 
 		(new thumbd.Worker({
 			saver: saver,
-			grabber: grabber,
+			grabber: grabber
 		})).start();
 		break;
 
@@ -155,6 +158,7 @@ switch (mode) {
 		// allow region/bucket to vary on a job by job basis.
 		if (argv.bucket) extraOpts.bucket = argv.bucket;
 		if (argv.aws_region) extraOpts.region = argv.aws_region;
+		if (argv.image_region) extraOpts.region = argv.image_region;
 
 		config.extend(opts);
 
