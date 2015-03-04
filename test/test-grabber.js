@@ -4,7 +4,7 @@ var assert = require('assert'),
   nock = require('nock');
 
 describe('Grabber', function() {
-  
+
   describe('download', function() {
 
     config.extend({
