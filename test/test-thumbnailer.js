@@ -51,7 +51,7 @@ describe("Thumbnailer", function() {
     describe('strict', function() {
 
       it('generates appropriate convert command', function() {
-        var convertCommand = 'convert "/tmp/333.png[0]" -resize 96X96!  /tmp/222.jpg';
+        var convertCommand = 'convert "/tmp/333.png[0]"  -resize 96X96!  /tmp/222.jpg';
 
         // We don't actually want to execute the
         // convert command.
@@ -75,7 +75,7 @@ describe("Thumbnailer", function() {
     describe('matted', function() {
 
       it('generates appropriate convert command for matted strategy', function() {
-        var convertCommand = 'convert "/tmp/444.png[0]" -resize 96X96 -size 96X96 xc:black +swap -gravity center -composite /tmp/222.jpg';
+        var convertCommand = 'convert "/tmp/444.png[0]"  -resize 96X96 -size 96X96 xc:black +swap -gravity center -composite /tmp/222.jpg';
 
         // We don't actually want to execute the
         // convert command.
@@ -99,7 +99,7 @@ describe("Thumbnailer", function() {
     describe('bounded', function() {
 
       it('generates appropriate convert command generated if no quality set', function() {
-        var convertCommand = 'convert "/tmp/111.png[0]" -thumbnail 96X96 /tmp/222.jpg';
+        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 /tmp/222.jpg';
 
         // We don't actually want to execute the
         // convert command.
@@ -119,7 +119,7 @@ describe("Thumbnailer", function() {
       });
 
       it('generates appropriate convert command generated if quality set', function() {
-        var convertCommand = 'convert "/tmp/111.png[0]" -thumbnail 96X96 -quality 75 /tmp/222.jpg';
+        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 -quality 75 /tmp/222.jpg';
 
         // We don't actually want to execute the
         // convert command.

@@ -19,7 +19,7 @@ describe('Grabber', function() {
             'x-amz-meta-foo': 'bar'
           })
           .get('/foo/awesome.jpg')
-          .reply(200);
+          .reply(200, 'abc123');
 
       grabber.download('my-bucket', 'us-east-1', '/foo/awesome.jpg', function(err, data, headers) {
         mockDownload.done();
