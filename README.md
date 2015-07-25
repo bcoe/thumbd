@@ -1,6 +1,7 @@
 Thumbd
 ======
 
+[![Coverage Status](https://coveralls.io/repos/bcoe/thumbd/badge.svg?branch=)](https://coveralls.io/r/bcoe/thumbd?branch=)
 [![Build Status](https://travis-ci.org/bcoe/thumbd.png)](https://travis-ci.org/bcoe/thumbd)
 
 Thumbd is an image thumbnailing server built on top of Node.js, SQS, S3, and ImageMagick.

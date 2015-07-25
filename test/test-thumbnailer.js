@@ -1,132 +1,128 @@
-var assert = require('assert'),
-  sinon = require('sinon'),
-  Thumbnailer = require('../lib/thumbnailer').Thumbnailer;
+/* global describe, it, beforeEach, afterEach */
 
-describe("Thumbnailer", function() {
+var assert = require('assert')
+var sinon = require('sinon')
+var Thumbnailer = require('../lib/thumbnailer').Thumbnailer
 
-  describe("createConversionPath", function() {
-
-    it("tmp.file() executed with appropriate parameters", function() {
+describe('Thumbnailer', function () {
+  describe('createConversionPath', function () {
+    it('tmp.file() executed with appropriate parameters', function () {
       // we mock tmp.file() which is called
       // during the thumbnailer's execute phase.
-      var tmp = {file: function() {}},
-        mock = sinon.mock(tmp)
-          .expects('file')
-          .once()
-          .withArgs({dir: '/tmp', postfix: '.png'}),
-        thumbnailer = new Thumbnailer({tmp: tmp});
+      var tmp = {file: function () {}}
+      var mock = sinon.mock(tmp)
+        .expects('file')
+        .once()
+        .withArgs({dir: '/tmp', postfix: '.png'})
+      var thumbnailer = new Thumbnailer({tmp: tmp})
 
       // execute the thumbnailer with
       // our mock tmp.
       thumbnailer.execute({
         format: 'png'
-      });
+      })
 
       // assert the expectations outlined
       // while creating the mock.
-      mock.verify();
-    });
+      mock.verify()
+    })
 
-  });
+  })
 
-  describe('execCommand', function() {
-
-    beforeEach(function() {
+  describe('execCommand', function () {
+    beforeEach(function () {
       // create a thumbnailer with some of the
       // internals stubbed out.
-      this.thumbnailer = new Thumbnailer();
-      this.thumbnailer.convertedPath = '/tmp/222.jpg';
+      this.thumbnailer = new Thumbnailer()
+      this.thumbnailer.convertedPath = '/tmp/222.jpg'
 
       // Simply execute callback when createConversionPath
       // is called.
       sinon.stub(this.thumbnailer, 'createConversionPath')
-        .callsArg(0);
-    });
+        .callsArg(0)
+    })
 
-    afterEach(function() {
+    afterEach(function () {
       // Restore sinon's mocks.
-      this.thumbnailer.execCommand.restore();
-    });
+      this.thumbnailer.execCommand.restore()
+    })
 
-    describe('strict', function() {
-
-      it('generates appropriate convert command', function() {
-        var convertCommand = 'convert "/tmp/333.png[0]"  -resize 96X96!  /tmp/222.jpg';
+    describe('strict', function () {
+      it('generates appropriate convert command', function () {
+        var convertCommand = 'convert "/tmp/333.png[0]"  -resize 96X96!  /tmp/222.jpg'
 
         // We don't actually want to execute the
         // convert command.
         var mock = sinon.mock(this.thumbnailer)
           .expects('execCommand')
           .once()
-          .withArgs(convertCommand);
+          .withArgs(convertCommand)
 
         this.thumbnailer.execute({
           width: 96,
           height: 96,
           format: 'png',
           strategy: 'strict'
-        }, '/tmp/333.png');
+        }, '/tmp/333.png')
 
-        mock.verify();
-      });
+        mock.verify()
+      })
 
-    });
+    })
 
-    describe('matted', function() {
-
-      it('generates appropriate convert command for matted strategy', function() {
-        var convertCommand = 'convert "/tmp/444.png[0]"  -resize 96X96 -size 96X96 xc:black +swap -gravity center -composite /tmp/222.jpg';
+    describe('matted', function () {
+      it('generates appropriate convert command for matted strategy', function () {
+        var convertCommand = 'convert "/tmp/444.png[0]"  -resize 96X96 -size 96X96 xc:black +swap -gravity center -composite /tmp/222.jpg'
 
         // We don't actually want to execute the
         // convert command.
         var mock = sinon.mock(this.thumbnailer)
           .expects('execCommand')
           .once()
-          .withArgs(convertCommand);
+          .withArgs(convertCommand)
 
         this.thumbnailer.execute({
           width: 96,
           height: 96,
           format: 'png',
           strategy: 'matted'
-        }, '/tmp/444.png');
+        }, '/tmp/444.png')
 
-        mock.verify();
-      });
+        mock.verify()
+      })
 
-    });
+    })
 
-    describe('bounded', function() {
-
-      it('generates appropriate convert command generated if no quality set', function() {
-        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 /tmp/222.jpg';
+    describe('bounded', function () {
+      it('generates appropriate convert command generated if no quality set', function () {
+        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 /tmp/222.jpg'
 
         // We don't actually want to execute the
         // convert command.
         var mock = sinon.mock(this.thumbnailer)
           .expects('execCommand')
           .once()
-          .withArgs(convertCommand);
+          .withArgs(convertCommand)
 
         this.thumbnailer.execute({
           width: 96,
           height: 96,
           format: 'png',
           strategy: 'bounded'
-        }, '/tmp/111.png');
+        }, '/tmp/111.png')
 
-        mock.verify();
-      });
+        mock.verify()
+      })
 
-      it('generates appropriate convert command generated if quality set', function() {
-        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 -quality 75 /tmp/222.jpg';
+      it('generates appropriate convert command generated if quality set', function () {
+        var convertCommand = 'convert "/tmp/111.png[0]"  -thumbnail 96X96 -quality 75 /tmp/222.jpg'
 
         // We don't actually want to execute the
         // convert command.
         var mock = sinon.mock(this.thumbnailer)
           .expects('execCommand')
           .once()
-          .withArgs(convertCommand);
+          .withArgs(convertCommand)
 
         this.thumbnailer.execute({
           quality: 75,
@@ -134,62 +130,62 @@ describe("Thumbnailer", function() {
           height: 96,
           format: 'png',
           strategy: 'bounded'
-        }, '/tmp/111.png');
+        }, '/tmp/111.png')
 
-        mock.verify();
-      });
+        mock.verify()
+      })
 
-    });
+    })
 
-    describe('manual', function() {
-      it('generates a custom convert command, and executes it with appropriate parameters', function() {
-        var convertCommand = "convert '/tmp/111.png' '/tmp/333.png' /tmp/222.jpg";
+    describe('manual', function () {
+      it('generates a custom convert command, and executes it with appropriate parameters', function () {
+        var convertCommand = "convert '/tmp/111.png' '/tmp/333.png' /tmp/222.jpg"
 
         // We don't actually want to execute the
         // convert command.
         var mock = sinon.mock(this.thumbnailer)
           .expects('execCommand')
           .once()
-          .withArgs(convertCommand);
+          .withArgs(convertCommand)
 
         this.thumbnailer.execute({
           strategy: "%(command)s '%(localPaths[0])s' '%(localPaths[1])s' %(convertedPath)s"
-        }, ['/tmp/111.png', '/tmp/333.png']);
+        }, ['/tmp/111.png', '/tmp/333.png'])
 
-        mock.verify();
-      });
-    });
+        mock.verify()
+      })
+    })
 
-  });
+  })
 
-  describe('_guessStrategy', function() {
-    it('it returns strategy name, if strategy exists', function() {
+  describe('_guessStrategy', function () {
+    it('it returns strategy name, if strategy exists', function () {
       var thumbnailer = new Thumbnailer({
         strategy: 'bounded'
-      });
+      })
 
-      assert.equal(thumbnailer._guessStrategy(), 'bounded');
-    });
+      assert.equal(thumbnailer._guessStrategy(), 'bounded')
+    })
 
-    it('executes onComplete with error, if strategy not found', function(done) {
+    it('executes onComplete with error, if strategy not found', function (done) {
       var thumbnailer = new Thumbnailer({
         strategy: 'unknown',
-        onComplete: function(err) {
-          assert.equal(err.message, 'could not find strategy unknown');
-          done();
+        onComplete: function (err) {
+          assert.equal(err.message, 'could not find strategy unknown')
+          done()
         }
-      });
+      })
 
-      thumbnailer._guessStrategy();
-    });
+      thumbnailer._guessStrategy()
+    })
 
-    it("returns 'manual' as strategy, if %(.*)s is present", function() {
+    it("returns 'manual' as strategy, if %(.*)s is present", function () {
       var thumbnailer = new Thumbnailer({
         strategy: '%(command)s foo -bar'
-      });
+      })
 
-      assert.equal(thumbnailer._guessStrategy(), 'manual');
-    });
-  });
+      assert.equal(thumbnailer._guessStrategy(), 'manual')
+    })
+  })
 
-});
+})

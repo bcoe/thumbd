@@ -1,13 +1,15 @@
-var assert = require('assert');
+/* global describe, it */
 
-describe('Config', function() {
-  it("should keep settings if config required multiple times", function() {
-    var Config = require('../lib/config').Config;
+var assert = require('assert')
 
-    Config.set('awsKey', 'abc123');
+describe('Config', function () {
+  it('should keep settings if config required multiple times', function () {
+    var Config = require('../lib/config').Config
 
-    Config = require('../lib/config').Config;
+    Config.set('awsKey', 'abc123')
 
-    assert.equal(Config.get('awsKey'), 'abc123');
-  });
-});
+    Config = require('../lib/config').Config
+
+    assert.equal(Config.get('awsKey'), 'abc123')
+  })
+})
