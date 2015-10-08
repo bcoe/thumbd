@@ -69,6 +69,10 @@ var yargs = require('yargs')
       alias: 'log_level',
       description: 'set log level (info|warn|error|silent)'
     })
+    .option('c', {
+      alias: 'custom_logger',
+      description: 'path to custom logger'
+    })
     .usage('Usage: $0 <command>')
     .command('server', 'start a thumbnailing server')
     .command('thumbnail', 'given S3 path and description, thumbnail an image')
@@ -93,6 +97,7 @@ var serverOpts = {
   sqs_queue: 'sqsQueue',
   tmp_dir: 'tmpDir',
   log_level: 'logLevel',
+  custom_logger: 'logger',
   profile: 'profile'
 }
 var thumbnailOpts = {
@@ -103,14 +108,15 @@ var thumbnailOpts = {
   remote_image: 'remoteImage',
   sqs_queue: 'sqsQueue',
   bucket: 's3Bucket',
-  log_level: 'logLevel'
+  log_level: 'logLevel',
+  custom_logger: 'logger'
 }
 var ndm = require('ndm')('thumbd')
 var opts = null
 
 // make console output nicer for missing arguments.
 process.on('uncaughtException', function (err) {
-  var logger = require('../lib/logger')
+  var logger = require(config.get('logger'))
   logger.error(err.message)
 })
 
@@ -162,7 +168,7 @@ switch (mode) {
     config.extend(opts)
 
     var client = new thumbd.Client()
-    var logger = require('../lib/logger')
+    var logger = require(config.get('logger'))
 
     client.thumbnail(
       opts.remoteImage,

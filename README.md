@@ -41,6 +41,10 @@ Thumbd requires the following environment variables to be set:
 
 When running locally, I set these environment variables in a .env file and execute thumbd using Foreman.
 
+Additionally, the following environment variable can be set to use a custom logger:
+
+**LOGGER_FILE** the path to a javascript file that exports the `info`, `warn` and `error` methods.
+
 Server
 ------
 
