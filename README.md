@@ -1,7 +1,7 @@
 Thumbd
 ======
 
-**Deprecation Warning: this project is no longer actively maintained, and is left here
+**Deprecation Warning: this project is no longer actively maintained and is left here
 as a historical artifact. Please feel free to fork this project and take over maintenance.** 
 
 [![Coverage Status](https://coveralls.io/repos/bcoe/thumbd/badge.svg?branch=)](https://coveralls.io/r/bcoe/thumbd?branch=)
